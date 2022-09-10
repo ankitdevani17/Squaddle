@@ -17,3 +17,12 @@ next();
 
 
 })
+
+exports.authorizeRoles = (...roles)=>{
+return (req,res,next)=>{
+    if(!roles.includes(req.user.role)){
+   new ErrorHandler("You are not authorized to access this resources",403)
+    }
+next();
+}
+}

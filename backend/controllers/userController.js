@@ -59,3 +59,17 @@ sendToken(user,200,res);
           message: "Logged Out",
         });
       });
+
+      exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
+        const user = await User.findOne({email:req.body.email});
+
+
+        if(!user){
+          return next( new ErrorHander("User not found",404))
+        }
+
+
+        await user.save({validateBeforeSave:false});
+
+        
+      })
