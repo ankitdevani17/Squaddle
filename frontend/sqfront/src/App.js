@@ -5,6 +5,7 @@ import LoginSignup from './Screen/LoginSignup';
 import Aboutus from './Screen/Aboutus';
 import Home from './Screen/Home';
 import Footer from './Components/Footer';
+import Profile from './Screen/Profile';
 
 const App = () => {
   return (
@@ -12,9 +13,9 @@ const App = () => {
       <>
       <Navb/>
       {/* <LoginSignup/> */}
-      <Home/>
+      {/* <Home/> */}
       {/* <Aboutus/> */}
-      
+      <Profile/>
       <Footer/>
 
       </>
