@@ -41,9 +41,7 @@ const Project = () => {
                     <h6>Duration of Project </h6>
                     <input type='text' className='form-control' placeholder='Title' />
 
-                    <h6>Industrial Experience </h6>
-                    <input type='text' className='form-control' placeholder='Title' />
-
+                    
                 </div>
                 <h6>Frameworks Used </h6>
                 <div className='row'>

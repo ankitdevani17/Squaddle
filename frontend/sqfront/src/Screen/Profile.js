@@ -24,6 +24,9 @@ const Profile = () => {
                         <input type='text' className='form-control' placeholder='Shyam' />
                         <h5>University : </h5>
                         <input type='text' className='form-control' placeholder='IIT B' />
+                        {/* <h4>Social URLs</h4> */}
+                        <h5>Linkedin :  </h5>
+                        <input type='text' className='form-control' placeholder='Linkedin Url' />
                     </div>
                     <div className='col-md-1'>
                     </div>
@@ -33,30 +36,43 @@ const Profile = () => {
                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
                             <label for="floatingTextarea2"> Short Intro about yourself ...</label>
                         </div>
+                        <h5>Twitter :  </h5>
+                        <input type='text' className='form-control' placeholder='Twitter Url' />
+
                     </div>
                 </div>
 
-
-
-                <h5>Area of Interest</h5>
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Web Development </a></li>
-                        <li><a class="dropdown-item" href="#">App Development</a></li>
-                        <li><a class="dropdown-item" href="#">ML/AI</a></li>
-                        <li><a class="dropdown-item" href="#">DevOps</a></li>
-                        <li><a class="dropdown-item" href="#">Networks</a></li>
-                        <li><a class="dropdown-item" href="#">CP</a></li>
-                    </ul>
+                <div className='row'>
+                <div className='col-md-3'>
+                    <h5>Area of Interest</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Web Development </a></li>
+                            <li><a class="dropdown-item" href="#">App Development</a></li>
+                            <li><a class="dropdown-item" href="#">ML/AI</a></li>
+                            <li><a class="dropdown-item" href="#">DevOps</a></li>
+                            <li><a class="dropdown-item" href="#">Networks</a></li>
+                            <li><a class="dropdown-item" href="#">CP</a></li>
+                        </ul>
+                    </div>
                 </div>
+                
+
+                <div className='col-md-3'>
+                    <h6>Industrial Experience </h6>
+                    <input type='text' className='form-control' placeholder='Title' />
+
+                </div>
+                </div>
+
                 <h5>Projects  : </h5>
                 <Proj />
-                <br/>
-                <br/>
-                <Proj/>
+                <br />
+                <br />
+                <Proj />
 
 
             </div>
