@@ -12,8 +12,9 @@ const App = () => {
       <>
       <Navb/>
       {/* <LoginSignup/> */}
-      {/* <Home/> */}
+      <Home/>
       {/* <Aboutus/> */}
+      
       <Footer/>
 
       </>
