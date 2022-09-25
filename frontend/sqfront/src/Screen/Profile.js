@@ -32,8 +32,8 @@ const Profile = () => {
                     </div>
                     <div className='col-md-4'>
                         <h5>Short Bio</h5>
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
+                        <div className="form-floating">
+                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
                             <label for="floatingTextarea2"> Short Intro about yourself ...</label>
                         </div>
                         <h5>Twitter :  </h5>
@@ -45,17 +45,17 @@ const Profile = () => {
                 <div className='row'>
                 <div className='col-md-3'>
                     <h5>Area of Interest</h5>
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div className="dropdown">
+                        <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown button
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Web Development </a></li>
-                            <li><a class="dropdown-item" href="#">App Development</a></li>
-                            <li><a class="dropdown-item" href="#">ML/AI</a></li>
-                            <li><a class="dropdown-item" href="#">DevOps</a></li>
-                            <li><a class="dropdown-item" href="#">Networks</a></li>
-                            <li><a class="dropdown-item" href="#">CP</a></li>
+                        <ul className="dropdown-menu">
+                            <li><a className="dropdown-item" href="#">Web Development </a></li>
+                            <li><a className="dropdown-item" href="#">App Development</a></li>
+                            <li><a className="dropdown-item" href="#">ML/AI</a></li>
+                            <li><a className="dropdown-item" href="#">DevOps</a></li>
+                            <li><a className="dropdown-item" href="#">Networks</a></li>
+                            <li><a className="dropdown-item" href="#">CP</a></li>
                         </ul>
                     </div>
                 </div>

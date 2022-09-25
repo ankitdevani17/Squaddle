@@ -21,8 +21,8 @@ const Project = () => {
                 </div>
                 <div className='col-md-4'>
                     <h5>Description of Project and Outcomes</h5>
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
+                    <div className="form-floating">
+                        <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
                         <label for="floatingTextarea2"> Summary</label>
                     </div>
                     {/* <div className="col-md-6"> */}
@@ -46,75 +46,75 @@ const Project = () => {
                 <h6>Frameworks Used </h6>
                 <div className='row'>
                     <div className='col-md-3'>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">React.js</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">React.js</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">UI Design</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">UI Design</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">PHP</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">PHP</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Python</label>
-                        </div>
-                    </div>
-                    <div className='col-md-3'>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Angular.js</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Node.js</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Scala</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">C++</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Python</label>
                         </div>
                     </div>
                     <div className='col-md-3'>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">React.js</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Angular.js</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">UI Design</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Node.js</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">PHP</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Scala</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Python</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">C++</label>
                         </div>
                     </div>
                     <div className='col-md-3'>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Angular.js</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">React.js</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Node.js</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">UI Design</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Scala</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">PHP</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">C++</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Python</label>
+                        </div>
+                    </div>
+                    <div className='col-md-3'>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Angular.js</label>
+                        </div>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Node.js</label>
+                        </div>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">Scala</label>
+                        </div>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" for="flexSwitchCheckDefault">C++</label>
                         </div>
                     </div>
 
