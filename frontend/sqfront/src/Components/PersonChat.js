@@ -3,7 +3,8 @@ import React from 'react'
 const PersonChat = () => {
   return (
     <div>
-        Chat builder
+        <div className='row border'>
+        </div>    
     </div>
   )
 }
