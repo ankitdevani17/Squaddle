@@ -50,7 +50,8 @@ const Project = (props) => {
                 <button type="button" onClick={editproject} className="btn btn-secondary mx-3">Edit </button>
                 <button type="button"onClick={deleteproject}   className="btn btn-danger">Delete</button>
             </h2>
-            {edit && <fieldset  >
+            {
+            <fieldset disabled={!edit}>
             <div className='row'>
                 <div className='col-md-3'>
                     <h6>Title</h6>
