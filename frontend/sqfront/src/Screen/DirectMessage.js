@@ -1,19 +1,15 @@
 import React from 'react'
-import PersonDM from '../Components/PersonDM'
+
 import PersonChat from '../Components/PersonChat'
+import DMList from '../Components/DMList'
 
 const DirectMessage = () => {
   return (
-    <>
-    <div className='container'>
+    <div >
+    <div className='container border'style={{height: "600px"}} >
         <div className='row'>
             <div className='col-md-3 border '>
-            <PersonDM/>
-            <PersonDM/>
-            <PersonDM/>
-            <PersonDM/>
-            <PersonDM/>
-            <PersonDM/>
+            <DMList/>
             </div>  
             <div className='col-md-1 ' >
                 {/* <div style={{ borderLeft: "3px solid black", height : "560px", position : "absolute"}}>
@@ -26,7 +22,7 @@ const DirectMessage = () => {
         
     </div>
     <hr/>
-    </>
+    </div>
   )
 }
 
