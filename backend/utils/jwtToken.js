@@ -2,7 +2,7 @@
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getJWTToken();
-  
+    const email = user.email
     // options for cookie
     const options = {
       expires: new Date(
@@ -10,8 +10,9 @@ const sendToken = (user, statusCode, res) => {
       ),
       httpOnly: true,
     };
-  
-    res.status(statusCode).cookie("token", token, options).json({
+    res.cookie("token", token, options);
+    res.cookie("email", email, options);
+    res.status(statusCode).json({
       success: true,
       user,
       token,

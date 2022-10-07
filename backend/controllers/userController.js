@@ -7,14 +7,13 @@ const sendToken = require("../utils/jwttoken");
 
 exports.registerUser =  catchAsyncErrors(async (req,res, next)=>{
     const {name,email,password} = req.body
-
-
     const user = await User.create({
         name,email,password,
         avatar:{
             public_id:"sample user",
             url:"sample url"
         }
+        
     })
 
 const token = user.getJWTToken();
@@ -22,10 +21,27 @@ sendToken(user,201,res);
 })
 
 //login
+exports.userDetails =  catchAsyncErrors(async (req,res, next)=>{
+const {email,token} = req.cookies
+res.json({
+  success:true,
+  email
+})
+
+// if(!email || !password){
+//   return next(new ErrorHander("Please Enter Email and Password",400))
+
+// }
+
+const update = req.body
+const opts = { new: true };
+
+let doc = await User.findOneAndUpdate({email}, update, opts);
+
+})
 
 exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
     const {email,password} = req.body
-
     if(!email || !password){
         return next(new ErrorHander("Please Enter Email and Password",400))
 
@@ -49,10 +65,12 @@ sendToken(user,200,res);
     // Logout 
 
     exports.logout = catchAsyncErrors(async (req, res, next) => {
-        res.cookie("token", null, {
-          expires: new Date(Date.now()),
-          httpOnly: true,
-        });
+        // res.cookie("token", null, {
+        //   expires: new Date(Date.now()),
+        //   httpOnly: true,
+        // });
+        res.clearCookie('token');
+        res.clearCookie('email');
       
         res.status(200).json({
           success: true,

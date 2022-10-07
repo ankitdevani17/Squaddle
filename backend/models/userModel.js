@@ -41,7 +41,38 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-
+  university :{
+    type:String,
+  },
+  bio :{
+    type:String,
+  },
+  linkedinURL :{
+    type:String,
+  },
+  twitterURL :{
+    type:String,
+  },
+  area : {
+    type:String,
+  },
+  experience : {
+    type:Number
+  },
+  
+  projects : [
+    {
+      title : String,
+      groupsize : Number,
+      link:String,
+      description : String,
+      repo:String,
+      mentor:String,
+      duration:Number,
+      frameworks : String
+    }
+  ]
+,
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
@@ -63,28 +94,25 @@ userSchema.methods.getJWTToken = function () {
 
 // Compare Password
 
-
-userSchema.methods.getResetPasswordToke = function(){
-
-  //Generating token 
-
-  const resetToken = crypto.randomBytes(20).toString("hex")
- // Hashing and adding resetPasswordToken to userSchema
- this.resetPasswordToken = crypto
- .createHash("sha256")
- .update(resetToken)
- .digest("hex");
-
-this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
-
-return resetToken;
-};
-
-  
-
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-//Password Reset
+// //Password Reset
+userSchema.methods.getResetPasswordToken = function () {
+  // Generating Token
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  // Hashing and adding resetPasswordToken to userSchema
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+
+  return resetToken;
+};
+
+
 module.exports = mongoose.model("User", userSchema)
