@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import image from '../Image/avatar.jpeg'
-import Proj from '../Components/Project'
+
 
 const Profile = () => {
 
