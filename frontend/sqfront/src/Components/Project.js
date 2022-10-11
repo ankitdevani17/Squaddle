@@ -17,7 +17,7 @@ const Project = (props) => {
 
 
     useEffect(() => {
-        console.log(toggle)
+        // console.log(toggle)
         settoggle(props.t)
     }, [props.t])
 
