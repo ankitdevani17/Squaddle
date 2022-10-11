@@ -26,16 +26,7 @@ const Project = (props) => {
     }, [props.projectitem])
 
 
-    const textupdate = (e) => {
-        const { name, value } = e.target
-        setprojectData((prev) => {
-            return {
-                ...prev,
-                [name]: value
-            }
-        })
-        console.log(projectData)
-    }
+    
     return (
         <div>
 
