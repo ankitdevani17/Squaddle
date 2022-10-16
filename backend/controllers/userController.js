@@ -3,91 +3,86 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwttoken");
 
-//Register User 
+//Register User
 
-exports.registerUser =  catchAsyncErrors(async (req,res, next)=>{
-    const {name,email,password} = req.body
-    const user = await User.create({
-        name,email,password,
-        avatar:{
-            public_id:"sample user",
-            url:"sample url"
-        }
-        
-    })
+exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const { name, email, password } = req.body;
+  const user = await User.create({
+    name,
+    email,
+    password,
+    avatar: {
+      public_id: "sample user",
+      url: "sample url",
+    },
+  });
 
-const token = user.getJWTToken();
-sendToken(user,201,res);
-})
+  const token = user.getJWTToken();
+  sendToken(user, 201, res);
+});
 
 //login
-exports.userDetails =  catchAsyncErrors(async (req,res, next)=>{
-const {email,token} = req.cookies
-res.json({
-  success:true,
-  email
-})
+exports.userDetails = catchAsyncErrors(async (req, res, next) => {
+  const { email, token } = req.cookies;
+  res.json({
+    success: true,
+    email,
+  });
 
-// if(!email || !password){
-//   return next(new ErrorHander("Please Enter Email and Password",400))
+  // if(!email || !password){
+  //   return next(new ErrorHander("Please Enter Email and Password",400))
 
-// }
+  // }
 
-const update = req.body
-const opts = { new: true };
+  const update = req.body;
+  const opts = { new: true };
 
-let doc = await User.findOneAndUpdate({email}, update, opts);
+  let doc = await User.findOneAndUpdate({ email }, update, opts);
+});
 
-})
+exports.loginUser = catchAsyncErrors(async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new ErrorHander("Please Enter Email and Password", 400));
+  }
 
-exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
-    const {email,password} = req.body
-    if(!email || !password){
-        return next(new ErrorHander("Please Enter Email and Password",400))
+  const user = await User.findOne({ email }).select("+password");
+  if (!user) {
+    return next(new ErrorHander("Please enter valid email or password"), 401);
+  }
 
-    }
+  const isPasswordMatched = await user.comparePassword(password);
 
-    const user = await User.findOne({email}).select("+password")
-    if(!user){
-        return next(new ErrorHander("Please enter valid email or password"),401)
-    }
+  if (!isPasswordMatched) {
+    return next(new ErrorHander("Invalid email or password", 401));
+  }
 
-    const isPasswordMatched = await user.comparePassword(password);
+  const token = user.getJWTToken();
 
-    if (!isPasswordMatched) {
-      return next(new ErrorHander("Invalid email or password", 401));
-    }
+  sendToken(user, 200, res);
+});
+// Logout
 
-    const token = user.getJWTToken();
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  // res.cookie("token", null, {
+  //   expires: new Date(Date.now()),
+  //   httpOnly: true,
+  // });
+  res.clearCookie("token");
+  res.clearCookie("email");
 
-sendToken(user,200,res);
-    })
-    // Logout 
+  res.status(200).json({
+    success: true,
+    message: "Logged Out",
+  });
+});
 
-    exports.logout = catchAsyncErrors(async (req, res, next) => {
-        // res.cookie("token", null, {
-        //   expires: new Date(Date.now()),
-        //   httpOnly: true,
-        // });
-        res.clearCookie('token');
-        res.clearCookie('email');
-      
-        res.status(200).json({
-          success: true,
-          message: "Logged Out",
-        });
-      });
+exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
 
-      exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
-        const user = await User.findOne({email:req.body.email});
+  if (!user) {
+    return next(new ErrorHander("User not found", 404));
+  }
 
-
-        if(!user){
-          return next( new ErrorHander("User not found",404))
-        }
-
-
-        await user.save({validateBeforeSave:false});
-
-        
-      })
+  await user.save({ validateBeforeSave: false });
+});

@@ -1,10 +1,12 @@
 import React from 'react'
-import 'whatwg-fetch';
+import axios from 'axios';
 const Login = () => {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [loginsuccess, setLoginsuccess] = React.useState(false)
     const [loginfail, setLoginfail] = React.useState(false)
+
+
     const textupdate = (e) => {
         const { name, value } = e.target
         if (name === 'email') {
@@ -15,42 +17,81 @@ const Login = () => {
         }
     }
 
+
+    // useEffect( () => {
+    //   const fetchApi = async () => {
+    //     let res = await fetch('http://localhost:4000/api/v1/login', {
+    //         method: 'POST', mode : 'cors',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             email: "ankitdevani189@gmail.com",
+    //             password: "password"
+    //         })
+    //     })
+    //     console.log(res, "ss");
+
+    //     console.log("world")
+    //   }
+    //   fetchApi();
+    //   console.log("Hello")
+    // }, [])
+
+
+
+
+
     const login = ((e) => {
         e.preventDefault()
-        // console.log(email, password)
-        fetch('http://localhost:4000/api/v1/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            //cors
-
-
-            body: JSON.stringify({
-                email: email,
-                password: password
+        axios.post("http://localhost:4000/api/v1/login", {
+            email: email,
+            password: password
+        },
+            { mode: 'cors' },
+            { withCredentials: true }
+        )
+            .then(() => {
+                // console.log(password)
+                setLoginsuccess(true)
+                setLoginfail(false)
             })
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success) {
-                    console.log("Login Successful")
-                    setLoginsuccess(true)
-                    setLoginfail(false)
+            .catch(
+                () => {
+                    // console.log(e)
+                    setLoginfail(true)
+                    setLoginsuccess(false)
                 }
-            })
-            .catch(error => {
-                setLoginfail(true)
-                setLoginsuccess(false)
-                throw (error)
-                
-            })
+            );
+
+
+        // console.log(email, password)
+        // fetch('http://localhost:4000/api/v1/login', {
+        //     method: 'POST', mode : 'cors',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         email: email,
+        //         password: password
+        //     })
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         if (data.success) {
+        //             console.log("Login Successful")
+        //             setLoginsuccess(true)
+        //             setLoginfail(false)
+        //         }
+        //     })
+        //     .catch(error => {
+        //         setLoginfail(true)
+        //         setLoginsuccess(false)
+        //         //  
+
+        //     })
 
     })
-
-
-
-
 
 
     return (
@@ -79,9 +120,9 @@ const Login = () => {
                     <label className="form-label">Password</label>
                     <input type="password" className="form-control" onChange={textupdate} name="password" value={password} id="exampleInputPassword1" />
                 </div>
-                <a href='#'>Forget Password?</a>
+                <a href='/'>Forget Password?</a>
                 <br />
-                <button type='button' onClick={login} className="btn btn-dark">Signin</button>
+                <button type='button' onClick={login} className="btn btn-dark">Login</button>
             </form>
         </div>
     )
