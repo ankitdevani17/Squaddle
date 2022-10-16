@@ -55,6 +55,11 @@ const Signup = () => {
 
 
             }
+            else {
+                setsignupsuccess(false)
+                setsignupfail(true)
+                console.log("password not matched")
+            }
         }
 
 
@@ -67,13 +72,13 @@ const Signup = () => {
             {
                 signupsuccess &&
                 <div className="alert alert-success" role="alert">
-                    Login Successful
+                    Signup Successful
                 </div>
             }
             {
                 signupfail &&
                 <div className="alert alert-danger" role="alert">
-                    Login Failed
+                    Signup  Failed
                 </div>
             }
             <form>
