@@ -23,15 +23,16 @@ sendToken(user,201,res);
 //login
 exports.userDetails =  catchAsyncErrors(async (req,res, next)=>{
 const {email,token} = req.cookies
+if(!email){
+  return next(new ErrorHander("Please Login or Sign up before you visit this page",400))
+
+}
 res.json({
   success:true,
   email
 })
 
-// if(!email || !password){
-//   return next(new ErrorHander("Please Enter Email and Password",400))
 
-// }
 
 const update = req.body
 const opts = { new: true };
