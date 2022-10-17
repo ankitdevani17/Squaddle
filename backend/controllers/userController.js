@@ -21,9 +21,11 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 201, res);
 });
 
-//login
+//UserDetails put request 
 exports.userDetails = catchAsyncErrors(async (req, res, next) => {
   const { email, token } = req.cookies;
+  const user =  await User.findOne({ email })
+
   res.json({
     success: true,
     email,
@@ -85,3 +87,12 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 });
+
+
+exports.userInfo =  catchAsyncErrors(async (req, res, next) => {
+
+  const email = req.query.email
+  const user = await User.findOne({email})
+  res.send(user)
+});
+
