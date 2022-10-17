@@ -10,11 +10,11 @@ const Home = () => {
           <div className='col-md-4'>
             <Filter/>
           </div>
+          <div className='col-md-2'></div>
           <div className='col-md-4'>
             <Card />
           </div>
-          <div className='col-md-4'>
-          </div>
+          <div className='col-md-2'></div>
         </div>
       </div>
     </div>
