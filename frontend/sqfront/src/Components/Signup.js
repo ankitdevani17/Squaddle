@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import Temp from './Temp'
 
 const Signup = () => {
     const [name, setName] = useState('')
@@ -12,20 +13,20 @@ const Signup = () => {
     const textupdate = (e) => {
         const { name, value } = e.target
         if (name === 'name') {
-            console.log(value)
+            // console.log(value)
             setName(value)
 
         }
         if (name === 'email') {
-            console.log(value)
+            // console.log(value)
             setEmail(value)
         }
         if (name === 'password') {
-            console.log(value)
+            // console.log(value)
             setPassword(value)
         }
         if (name === 'password2') {
-            console.log(value)
+            // console.log(value)
             setPassword2(value)
         }
     }
@@ -34,7 +35,7 @@ const Signup = () => {
         e.preventDefault()
         if (password) {
             if (password === password2) {
-                console.log("Password matches")
+                // console.log("Password matches")
                 axios.post("http://localhost:4000/api/v1/register", {
                     name: name,
                     email: email,
@@ -44,7 +45,7 @@ const Signup = () => {
                     { withCredentials: true }
                 )
                     .then(() => {
-                        console.log("login successful")
+                        // console.log("login successful")
                         setsignupsuccess(true)
                         setsignupfail(false)
                     })
@@ -58,17 +59,16 @@ const Signup = () => {
             else {
                 setsignupsuccess(false)
                 setsignupfail(true)
-                console.log("password not matched")
+                // console.log("password not matched")
             }
         }
-
-
-
 
     })
 
     return (
+       
         <div>
+             <Temp/>
             {
                 signupsuccess &&
                 <div className="alert alert-success" role="alert">

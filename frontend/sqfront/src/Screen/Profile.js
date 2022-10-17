@@ -48,7 +48,7 @@ const Profile = () => {
         // console.log(projectData)
     }
     const editproject = (id) => {
-        console.log("hello")
+        // console.log("hello")
         // console.log(projectlist[id].edit)
         setProjectlist(
             projectlist.map((pro) => {
@@ -64,7 +64,7 @@ const Profile = () => {
     }
 
     const submitproject = (id) => {
-        console.log("hello")
+        // console.log("hello")
         setProjectlist(
             projectlist.map((pro) => {
                 if (pro.id === id) {
