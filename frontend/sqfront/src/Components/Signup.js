@@ -1,31 +1,107 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 
 const Signup = () => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
+    const [signupsuccess, setsignupsuccess] = useState(false)
+    const [signupfail, setsignupfail] = useState(false)
+
+    const textupdate = (e) => {
+        const { name, value } = e.target
+        if (name === 'name') {
+            console.log(value)
+            setName(value)
+
+        }
+        if (name === 'email') {
+            console.log(value)
+            setEmail(value)
+        }
+        if (name === 'password') {
+            console.log(value)
+            setPassword(value)
+        }
+        if (name === 'password2') {
+            console.log(value)
+            setPassword2(value)
+        }
+    }
+
+    const signup = ((e) => {
+        e.preventDefault()
+        if (password) {
+            if (password === password2) {
+                console.log("Password matches")
+                axios.post("http://localhost:4000/api/v1/register", {
+                    name: name,
+                    email: email,
+                    password: password
+                },
+                    { mode: 'cors' },
+                    { withCredentials: true }
+                )
+                    .then(() => {
+                        console.log("login successful")
+                        setsignupsuccess(true)
+                        setsignupfail(false)
+                    })
+                    .catch(() => {
+                        setsignupsuccess(false)
+                        setsignupfail(true)
+                    })
+
+
+            }
+            else {
+                setsignupsuccess(false)
+                setsignupfail(true)
+                console.log("password not matched")
+            }
+        }
+
+
+
+
+    })
+
     return (
         <div>
+            {
+                signupsuccess &&
+                <div className="alert alert-success" role="alert">
+                    Signup Successful
+                </div>
+            }
+            {
+                signupfail &&
+                <div className="alert alert-danger" role="alert">
+                    Signup  Failed
+                </div>
+            }
             <form>
                 <h1> SIgnup</h1>
-            <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                    
+                <div className="mb-3">
+                    <label className="form-label">Name</label>
+                    <input type="text" className="form-control" id="exampleInputName" onChange={textupdate} name="name" value={name} aria-describedby="emailHelp" />
+
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <div className="mb-3">
+                    <label className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" name="email" value={email} onChange={textupdate} aria-describedby="emailHelp" />
+                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" />
+                <div className="mb-3">
+                    <label className="form-label">Password</label>
+                    <input type="password" className="form-control" name="password" value={password} onChange={textupdate} id="exampleInputPassword1" />
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Re-enter Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" />
+                <div className="mb-3">
+                    <label className="form-label">Re-enter Password</label>
+                    <input type="password" className="form-control" name="password2" value={password2} onChange={textupdate} id="exampleInputPassword2" />
                 </div>
-                
-                
-                <button type='button' className="btn btn-dark">Create Account</button>
+                <button type='button' onClick={signup} className="btn btn-dark">Create Account</button>
             </form>
         </div>
     )

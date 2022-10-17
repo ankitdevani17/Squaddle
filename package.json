@@ -21,6 +21,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "bootstrap": "^5.2.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
@@ -29,6 +30,7 @@
     "mongoose": "^6.5.5",
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19",
+    "react-bootstrap": "^2.5.0",
     "validator": "^13.7.0"
   }
 }

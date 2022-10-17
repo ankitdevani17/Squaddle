@@ -1,5 +1,4 @@
 import React from 'react'
-
 import PersonChat from '../Components/PersonChat'
 import DMList from '../Components/DMList'
 
@@ -19,7 +18,6 @@ const DirectMessage = () => {
             <PersonChat/>
             </div>      
         </div>
-        
     </div>
     <hr/>
     </div>
