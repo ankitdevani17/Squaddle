@@ -96,3 +96,29 @@ exports.userInfo =  catchAsyncErrors(async (req, res, next) => {
   res.send(user)
 });
 
+
+
+// Swipe right and add match
+exports.addMatch =  catchAsyncErrors(async (req, res, next) => {
+
+const {email, matchedEmail} = req.body
+const query = {email : email}
+
+const updateMatch = {
+  $push : {matches : {email: matchedEmail}},
+
+}
+
+const user = await User.updateOne(query, updateMatch)
+res.json(user)
+
+});
+
+// display all users
+exports.getAllUsers=  catchAsyncErrors(async (req, res, next) => {
+
+const users = await User.find({})
+res.json(users)
+
+});
+
