@@ -8,7 +8,7 @@ function Navb() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
+        <div className="container-fluid navb-style">
           <a className="navbar-brand" href="#">
             Squaddle logo{" "}
           </a>
