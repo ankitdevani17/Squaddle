@@ -1,17 +1,17 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Routes, Route, Link } from "react-router-dom";
+// import Container from "react-bootstrap/Container";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
+// import NavDropdown from "react-bootstrap/NavDropdown";
+import {  Link } from "react-router-dom";
 
 function Navb() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid navb-style">
-          <a className="navbar-brand" href="#">
+          {/* <a className="navbar-brand" href="">
             Squaddle logo{" "}
-          </a>
+          </a> */}
           <button
             className="navbar-toggler"
             type="button"
