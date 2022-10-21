@@ -5,3 +5,20 @@ the attribute used for groupby can only be used for select / aggregrate func lik
    
 Select dept,count(*)  from emp  group by dept 
 ````
+
+````
+Redux - state management tool as CDS
+
+Reducers
+- manage state and return newly updated state
+
+Actions 
+1st prop - unique identifier
+2nd prop - payload having data
+
+dispatch
+- send action to update data
+
+````
+
+

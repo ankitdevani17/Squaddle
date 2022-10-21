@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import Temp from './Temp'
+
 
 const Signup = () => {
     const [name, setName] = useState('')
@@ -66,9 +66,8 @@ const Signup = () => {
     })
 
     return (
-       
         <div>
-             <Temp/>
+             
             {
                 signupsuccess &&
                 <div className="alert alert-success" role="alert">

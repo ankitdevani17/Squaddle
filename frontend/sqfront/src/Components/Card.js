@@ -10,6 +10,7 @@ import {
 import { ImCross } from "react-icons/im";
 // import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 
+
 const Card = () => {
   return (
     <div>
