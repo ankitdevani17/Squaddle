@@ -69,18 +69,18 @@ const Profile = () => {
     }
 
     const submitproject = (id) => {
-        // console.log("hello")
-        // setProjectlist(
-        //     projectlist.map((pro) => {
-        //         if (pro.id === id) {
-        //             return {
-        //                 ...pro,
-        //                 edit: true
-        //             }
-        //         }
-        //         return pro
-        //     })
-        // )
+        
+        setProjectlist(
+            projectlist.map((pro) => {
+                if (pro.id === id) {
+                    return {
+                        ...pro,
+                        edit: true
+                    }
+                }
+                return pro
+            })
+        )
     }
 
     const addProject = () => {
@@ -147,8 +147,7 @@ const Profile = () => {
                     <div className='col-md-3'>
                         <h5>Area of Interest</h5>
                         <DropdownButton
-                            alignRight
-                            title="Dropdown right"
+                            title= {Profobj.areaofinterest ? Profobj.areaofinterest : "Select Interest"} 
                             id="dropdown-menu-align-right"
                             onSelect={areaofinterestselect}
                         >
@@ -163,7 +162,7 @@ const Profile = () => {
 
                     <div className='col-md-3'>
                         <h6>Industrial Experience </h6>
-                        <input type='text' className='form-control' placeholder='Title' />
+                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value ={Profobj.industrialexp} placeholder='Title' />
                     </div>
                 </div>
 
