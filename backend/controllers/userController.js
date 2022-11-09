@@ -115,7 +115,7 @@ res.json(user)
 });
 
 // display all users
-exports.getAllUsers=  catchAsyncErrors(async (req, res, next) => {
+exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
 const users = await User.find({})
 res.json(users)

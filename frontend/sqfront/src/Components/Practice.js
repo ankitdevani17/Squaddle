@@ -36,10 +36,7 @@ const Practice = () => {
 
     return (
         <div>
-            {/* <h1>{vardata[0].id}</h1> */}
-            {
-                // console.log(vardata[0])
-            }
+            
             <table className="border">
                 <tbody>
                     <tr>
