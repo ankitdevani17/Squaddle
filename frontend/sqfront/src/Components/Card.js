@@ -1,6 +1,6 @@
 import React from "react";
 import avatar from "../Image/avatar.jpeg";
-import ReactRoundedImage from "react-rounded-image";
+// import ReactRoundedImage from "react-rounded-image";
 import "./Card.css";
 import {
 
@@ -17,7 +17,7 @@ const Card = () => {
         <div className="card-body text-center">
           {/* <img className="rounded"src={avatar}/> */}
           <div className="image">
-            <ReactRoundedImage
+            {/* <ReactRoundedImage
               image={avatar}
               roundedColor="#321124"
               imageWidth="150"
@@ -25,7 +25,7 @@ const Card = () => {
               roundedSize="13"
               borderRadius="70"
               hoverColor="#DD1144"
-            />
+            /> */}
           </div>
           <br></br>
           <h5 className="card-title">Deepak Ahuja </h5>

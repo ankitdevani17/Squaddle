@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import Practice from './Practice'
 
 
 const Signup = () => {
@@ -30,7 +31,6 @@ const Signup = () => {
             setPassword2(value)
         }
     }
-
     const signup = ((e) => {
         e.preventDefault()
         if (password) {
@@ -81,6 +81,7 @@ const Signup = () => {
                 </div>
             }
             <form>
+                {/* <Practice/> */}
                 <h1> SIgnup</h1>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
