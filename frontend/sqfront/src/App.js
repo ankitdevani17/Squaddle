@@ -8,7 +8,7 @@ import Footer from './Components/Footer';
 import Profile from './Screen/Profile';
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Link } from "react-router-dom";
-import DirectMessage from './Screen/DirectMessage';
+import Message from './Screen/Message';
 
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/about" element={<Aboutus/>}/>
         <Route path="/login" element={<LoginSignup/>}/>
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/dm" element={<DirectMessage/>}/>
+        <Route path="/dm" element={<Message/>}/>
         <Route path='*' element={<h1>404 Not Found</h1>} />
       
       
