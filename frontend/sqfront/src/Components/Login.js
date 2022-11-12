@@ -1,6 +1,10 @@
 import React from 'react'
 import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/auth-slice";
+
 const Login = () => {
+    const dispatch = useDispatch();
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [loginsuccess, setLoginsuccess] = React.useState(false)
@@ -17,26 +21,6 @@ const Login = () => {
         }
     }
 
-
-    // useEffect( () => {
-    //   const fetchApi = async () => {
-    //     let res = await fetch('http://localhost:4000/api/v1/login', {
-    //         method: 'POST', mode : 'cors',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             email: "ankitdevani189@gmail.com",
-    //             password: "password"
-    //         })
-    //     })
-    //     console.log(res, "ss");
-
-    //     console.log("world")
-    //   }
-    //   fetchApi();
-    //   console.log("Hello")
-    // }, [])
 
 
 
@@ -55,6 +39,7 @@ const Login = () => {
                 // console.log(password)
                 setLoginsuccess(true)
                 setLoginfail(false)
+                dispatch(authActions.login())
             })
             .catch(
                 () => {

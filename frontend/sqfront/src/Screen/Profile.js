@@ -1,55 +1,60 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import image from '../Image/avatar.jpeg'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const Profile = () => {
 
-    const [projectlist, setProjectlist] = useState([
-        {
-            id: 1,
-            title: 'Project 1',
-            grpsize: '2',
-            desc: 'This is a project',
-            mentor: 'Mentor 1',
-            duration: '2',
-            link: '',
-            repo: '',
-            techstack: '',
-            edit :  false
-        },
-        {
-            id: 2,
-            title: 'Project 1',
-            grpsize: '2',
-            desc: 'This is a project',
-            mentor: 'Mentor 1',
-            duration: '2',
-            link: '',
-            repo: '',
-            techstack: '',
-            edit :  false
-        },
-    ])
+    const [projectlist, setProjectlist] = useState([])
 
-    const imageupload = () => {
+    const [Profobj, setProfobj] = useState([])
+    
+
+    const areaofinterestselect = (e) => {
+        console.log(e);
+        setProfobj({
+            ...Profobj,
+            areaofinterest: e
+        })
+        console.log(Profobj);
+    }
+    const profinitialization = (e) => {
+        const r = e.target.name
+        const s = e.target.value
+        // console.log(s)
+        setProfobj(
+            {
+                ...Profobj,
+                [r]: s
+            }
+        )
+        console.log(Profobj)
+    }
+    const imageupload = (e) => {
+        // const r = e.target.name
+        // const s = e.target.files[0]
+        // console.log("image upload")
+        // setProfobj({
+        //     ...Profobj,
+        //     [r]: s
+        // })
+        // console.log(Profobj.image)
     }
 
     const deleteproject = (id) => {
         setProjectlist(projectlist.filter((pro) => pro.id !== id))
     }
-    const textupdate = (e) => {
-        // const { name, value } = e.target
-        // setprojectData((prev) => {
-        //     return {
-        //         ...prev,
-        //         [name]: value
-        //     }
-        // })
-        // console.log(projectData)
+    const textupdate = (e, ind) => {
+        const { name, value } = e.target
+        // console.log({ name, value }) 
+        let newprojectlist = [...projectlist]
+        newprojectlist[ind][name] = value
+        setProjectlist(newprojectlist)
+
     }
     const editproject = (id) => {
-        // console.log("hello")
-        // console.log(projectlist[id].edit)
+
         setProjectlist(
             projectlist.map((pro) => {
                 if (pro.id === id) {
@@ -64,7 +69,7 @@ const Profile = () => {
     }
 
     const submitproject = (id) => {
-        // console.log("hello")
+        
         setProjectlist(
             projectlist.map((pro) => {
                 if (pro.id === id) {
@@ -84,44 +89,56 @@ const Profile = () => {
                 [
                     ...projectlist,
                     {
-                        id: (projectlist.length == 0) ? 1 : projectlist[projectlist.length - 1].id + 1, title: '', grpsize: '', desc: '', mentor: '', duration: '', link: '', repo: '', techstack: ''
+                        id: (projectlist.length === 0) ? 1 : projectlist[projectlist.length - 1].id + 1,
+                        title: '', grpsize: '', desc: '', mentor: '', duration: '', link: '', repo: '', techstack: ''
                     }
                 ]
             )
         })
+
+
     }
 
+    useEffect(() => {
+        setProfobj({
+            ...Profobj,
+            projects: projectlist
+        })
+        // console.log(projectlist)
+    }, [projectlist])
 
-   
+
+
+
 
     return (
         <div>
             <div className='container'>
                 <div className='row'>
                     <div className='col-md-3'>
-                        <img src={image} className="image-style align-content-center flex justify-content-center my-4 mx-3" alt="..."></img>
-                        <input type="file" onChange={imageupload} className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+                        <img src={Profobj.image} className="image-style align-content-center flex justify-content-center my-4 mx-3" alt="..."></img>
+                        <input type="file" name="" value={Profobj.image} onClick={imageupload} className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
                     </div>
 
                     <div className='col-md-4'>
                         <h5>Name : </h5>
-                        <input type='text' className='form-control' placeholder='Shyam' />
+                        <input type='text' className='form-control' name="name" onChange={profinitialization} value={Profobj.name} placeholder='' />
                         <h5>University : </h5>
-                        <input type='text' className='form-control' placeholder='IIT B' />
+                        <input type='text' className='form-control' name="university" onChange={profinitialization} value={Profobj.university} placeholder='' />
                         {/* <h4>Social URLs</h4> */}
                         <h5>Linkedin :  </h5>
-                        <input type='text' className='form-control' placeholder='Linkedin Url' />
+                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={Profobj.linkedinurl} placeholder='Linkedin Url' />
                     </div>
                     <div className='col-md-1'>
                     </div>
                     <div className='col-md-4'>
                         <h5>Short Bio</h5>
                         <div className="form-floating">
-                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
+                            <textarea className="form-control" name="bio" onChange={profinitialization} value={Profobj.bio} placeholder="" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
                             <label  >Short Intro about yourself </label>
                         </div>
                         <h5>Twitter :  </h5>
-                        <input type='text' className='form-control' placeholder='Twitter Url' />
+                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={Profobj.twitterurl} placeholder='' />
 
                     </div>
                 </div>
@@ -129,25 +146,23 @@ const Profile = () => {
                 <div className='row'>
                     <div className='col-md-3'>
                         <h5>Area of Interest</h5>
-                        <div className="dropdown">
-                            <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Web Development </a></li>
-                                <li><a className="dropdown-item" href="#">App Development</a></li>
-                                <li><a className="dropdown-item" href="#">ML/AI</a></li>
-                                <li><a className="dropdown-item" href="#">DevOps</a></li>
-                                <li><a className="dropdown-item" href="#">Networks</a></li>
-                                <li><a className="dropdown-item" href="#">CP</a></li>
-                            </ul>
-                        </div>
+                        <DropdownButton
+                            title= {Profobj.areaofinterest ? Profobj.areaofinterest : "Select Interest"} 
+                            id="dropdown-menu-align-right"
+                            onSelect={areaofinterestselect}
+                        >
+                            <Dropdown.Item eventKey="Frontend">Frontend</Dropdown.Item>
+                            <Dropdown.Item eventKey="Backend">Backend</Dropdown.Item>
+                            <Dropdown.Item eventKey="Data Science">Data Science</Dropdown.Item>
+                            <Dropdown.Item eventKey="Machine Learning">Machine Learning</Dropdown.Item>
+                            <Dropdown.Item eventKey="QA Testing">QA Testing</Dropdown.Item>
+                        </DropdownButton>
                     </div>
 
 
                     <div className='col-md-3'>
                         <h6>Industrial Experience </h6>
-                        <input type='text' className='form-control' placeholder='Title' />
+                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value ={Profobj.industrialexp} placeholder='Title' />
                     </div>
                 </div>
 
@@ -169,37 +184,37 @@ const Profile = () => {
                                         <div className='row'>
                                             <div className='col-md-3'>
                                                 <h6>Title</h6>
-                                                <input type='text' className='form-control' name='title' onChange={textupdate}  />
+                                                <input type='text' className='form-control' name='title' onChange={(e) => { textupdate(e, ind) }} />
                                                 <h6>Group Size</h6>
-                                                <input type='number' className='form-control' name='grpsize' onChange={textupdate} placeholder='Group Size' />
+                                                <input type='number' className='form-control' name='grpsize' onChange={(e) => { textupdate(e, ind) }} placeholder='Group Size' />
                                                 <h6>Deployed Link (if any)</h6>
-                                                <input type='text' className='form-control' name='link' onChange={textupdate}  placeholder='Group Size' />
+                                                <input type='text' className='form-control' name='link' onChange={(e) => { textupdate(e, ind) }} placeholder='Group Size' />
                                             </div>
                                             <div className='col-1'>
                                             </div>
                                             <div className='col-md-4'>
                                                 <h5>Description of Project and Outcomes</h5>
                                                 <div className="form-floating">
-                                                    <textarea className="form-control" name='desc' onChange={textupdate}  placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
+                                                    <textarea className="form-control" name='desc' onChange={(e) => { textupdate(e, ind) }} placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
                                                     <label > Summary</label>
                                                 </div>
 
                                                 <h6>Github Repo</h6>
-                                                <input type='text' className='form-control' name="repo" onChange={textupdate}  placeholder='Github Repository' />
+                                                <input type='text' className='form-control' name="repo" onChange={(e) => { textupdate(e, ind) }} placeholder='Github Repository' />
                                             </div>
                                             <div className='col-1'>
                                             </div>
                                             <div className='col-md-3'>
                                                 <h6>Mentor of the Project</h6>
-                                                <input type='text' className='form-control' name='mentor' onChange={textupdate} placeholder='Title' />
+                                                <input type='text' className='form-control' name='mentor' onChange={(e) => { textupdate(e, ind) }} placeholder='Title' />
                                                 <h6>Duration of Project </h6>
-                                                <input type='number' className='form-control' name='duration'  onChange={textupdate} placeholder='Title' />
+                                                <input type='number' className='form-control' name='duration' onChange={(e) => { textupdate(e, ind) }} placeholder='Title' />
 
 
                                             </div>
                                             <h6>Frameworks Used </h6>
                                             <div className="form">
-                                                <input type='text' className='form-control' name='techstack'  onChange={textupdate} placeholder='Tech Stack used' />
+                                                <input type='text' className='form-control' name='techstack' onChange={(e) => { textupdate(e, ind) }} placeholder='Tech Stack used' />
                                             </div>
 
 
@@ -207,7 +222,7 @@ const Profile = () => {
                                         <br />
                                     </fieldset>
                                 }
-                                <button type='submit'  onClick = {()=>submitproject(project.id)} className='btn btn-primary' disabled={project.edit}>Submit</button >
+                                <button type='submit' onClick={() => submitproject(project.id)} className='btn btn-primary' disabled={project.edit}>Submit</button >
                             </div>
                         )
                     }

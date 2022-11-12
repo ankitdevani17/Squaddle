@@ -1,0 +1,39 @@
+.Text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.Text_Top {
+  display: flex;
+}
+
+.Text_Img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.Text_Msg {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: blue;
+  color: white;
+  max-width: 400px;
+}
+
+.Text_Bottom {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.Text.own {
+  align-items: flex-end;
+}
+
+.Text.own .Text_Msg {
+  background-color: rgb(205, 205, 205);
+  color: black;
+}

@@ -1,0 +1,21 @@
+.Conversation {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.Conversation:hover {
+  background-color: rgb(206, 206, 206);
+}
+.Conversation_Img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+.Conversation_Name {
+  font-weight: 500;
+}

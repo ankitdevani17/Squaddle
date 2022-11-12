@@ -1,23 +1,23 @@
 import React from "react";
 import avatar from "../Image/avatar.jpeg";
-import ReactRoundedImage from "react-rounded-image";
+// import ReactRoundedImage from "react-rounded-image";
 import "./Card.css";
 import {
-  BsSuitHeartFill,
+
   BsArrowLeftCircle,
   BsArrowRightCircle,
 } from "react-icons/bs";
-import { ImCross } from "react-icons/im";
-// import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+
+
 
 const Card = () => {
   return (
-    <div>
+    <div  >
       <div className="card">
         <div className="card-body text-center">
           {/* <img className="rounded"src={avatar}/> */}
           <div className="image">
-            <ReactRoundedImage
+            {/* <ReactRoundedImage
               image={avatar}
               roundedColor="#321124"
               imageWidth="150"
@@ -25,7 +25,7 @@ const Card = () => {
               roundedSize="13"
               borderRadius="70"
               hoverColor="#DD1144"
-            />
+            /> */}
           </div>
           <br></br>
           <h5 className="card-title">Deepak Ahuja </h5>
@@ -46,7 +46,7 @@ const Card = () => {
           <div className="icons">
             <button type="button" className="btn btn-danger round">
               {" "}
-              <BsArrowLeftCircle size={50}/>
+              <BsArrowLeftCircle size={50} />
             </button>
             <button type="button" className="btn btn-success round">
               {" "}

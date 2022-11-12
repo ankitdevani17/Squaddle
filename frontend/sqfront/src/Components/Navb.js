@@ -1,17 +1,26 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Routes, Route, Link } from "react-router-dom";
+// import Container from "react-bootstrap/Container";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
+// import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from '../store/auth-slice'
 
 function Navb() {
+  const dispatch = useDispatch()
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  const logout = () => {
+    dispatch(authActions.logout())
+  }
+
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+        <div className="container-fluid navb-style">
+          {/* <a className="navbar-brand" href="">
             Squaddle logo{" "}
-          </a>
+          </a> */}
           <button
             className="navbar-toggler"
             type="button"
@@ -36,23 +45,28 @@ function Navb() {
                   About Us
                 </Link>
               </li>
-              {/* <li className="nav-item">
-          <a className="nav-link" href="#">Roadmap</a>
-        </li> */}
+             
               <li className="nav-item">
-                <Link to="/dm" className="nav-link" href="#">
+                {
+                  isLoggedIn &&
+                  <Link to="/dm" className="nav-link" href="#">
                   Message
                 </Link>
+                }
               </li>
             </ul>
             <form className="d-flex">
               <Link to="/profile">
-                <button className="btn btn-outline-success" type="submit">
-                  Edit Profile
-                </button>
+                {
+                  isLoggedIn &&
+                  <button className="btn btn-outline-success" type="submit">
+                    Edit Profile
+                  </button>
+
+                }
               </Link>
               <Link to="/login">
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-success" onClick={logout} type="submit">
                   Logout
                 </button>
               </Link>

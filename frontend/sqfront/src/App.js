@@ -8,30 +8,36 @@ import Footer from './Components/Footer';
 import Profile from './Screen/Profile';
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Link } from "react-router-dom";
-import DirectMessage from './Screen/DirectMessage';
-
+import Message from './Screen/Message';
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   return (
     <div>
       <>
-      <BrowserRouter>
-      <Navb/>
-      <Routes>
+        <BrowserRouter>
+          <Navb />
+          <Routes>
       
-      
-        <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<Aboutus/>}/>
-        <Route path="/login" element={<LoginSignup/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/dm" element={<DirectMessage/>}/>
-        <Route path='*' element={<h1>404 Not Found</h1>} />
-      
-      
-      </Routes>
-      <Footer/>
-      
-      </BrowserRouter>
+            {
+
+            }
+
+            <Route path="/" element={isLoggedIn ? <Home /> : <LoginSignup />} />
+            <Route path="/about" element={<Aboutus />} />
+
+            <Route path="/login" element={<LoginSignup />} />
+
+            <Route path="/profile" element={isLoggedIn ? <Profile /> : <LoginSignup />} />
+            <Route path="/dm" element={isLoggedIn ? <Message /> : <LoginSignup />} />
+            <Route path='*' element={<h1>404 Not Found</h1>} />
+
+
+          </Routes>
+          <Footer />
+
+        </BrowserRouter>
 
       </>
     </div>

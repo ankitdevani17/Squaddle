@@ -8,8 +8,8 @@ const Filter = () => {
                 </div>     */}
                 <div className='col-md-10'>
                
-            <h4>Filter Profile by Preference</h4>
-
+            <span>Filter Profile by Preference</span> 
+           
             <h5>Area of Interest</h5>
             <div className="dropdown">
                 <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
