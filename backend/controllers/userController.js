@@ -1,6 +1,7 @@
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
+const Message = require("../models/messageModel");
 const sendToken = require("../utils/jwttoken");
 
 //Register User
@@ -62,6 +63,8 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
   sendToken(user, 200, res);
 });
+
+
 // Logout
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
@@ -114,11 +117,55 @@ res.json(user)
 
 });
 
-// display all users
-exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
+
+// Swipe left and remove from users list 
+exports.leftSwipe=  catchAsyncErrors(async (req, res, next) => {
+
+  const {email, leftSwipeEmail} = req.body
+  const query = {email : email}
+  
+  const updateMatch = {
+    $push : {leftSwipe : {email: leftSwipeEmail}},
+  
+  }
+  
+  const user = await User.updateOne(query, updateMatch)
+  res.json(user)
+  
+  });
+
+
+// display all users on dashboard 
+exports.getAllUsers=  catchAsyncErrors(async (req, res, next) => {
 
 const users = await User.find({})
 res.json(users)
 
 });
+
+// Get Messages by from_userId and to_userId
+
+exports.getMessage=  catchAsyncErrors(async (req, res, next) => {
+  const {from_email, to_email} = req.body
+  
+  const query = {
+    from_email:from_email, to_email :  to_email
+}
+
+const foundMessages = await Message.find(query)
+res.send(foundMessages)
+
+  });
+
+// Add a Message to our Database
+
+exports.addMessage=  catchAsyncErrors(async (req, res, next) => {
+
+  const {from_email, to_email,message} = req.body
+  const insertedMessage = await Message.create({from_email, to_email,message})
+  res.send(insertedMessage)
+
+  });
+
+
 

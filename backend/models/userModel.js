@@ -29,7 +29,11 @@ const userSchema = new mongoose.Schema({
     email : String}
     
   ],
-
+  leftSwipe :[
+    {
+    email : String}
+    
+  ],
   avatar: {
     public_id: {
       type: String,
