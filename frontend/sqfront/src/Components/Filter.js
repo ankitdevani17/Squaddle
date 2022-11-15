@@ -25,7 +25,7 @@ const Filter = () => {
                 </ul>
             </div>
 
-            <label for="customRange2" className="form-label">Years of Experience </label>
+            <label htmlFor="customRange2" className="form-label">Years of Experience </label>
             <input type="range" className="form-range form-range-track-width-80" min="0" max="3" step="0.5" id="customRange2"></input>
 
             <h5>Specific Expertise for Development</h5>
@@ -34,13 +34,13 @@ const Filter = () => {
                 <div className='col-md-6'>
                     <div className="form-check">
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                        <label className="form-check-label" for="flexRadioDefault1">
+                        <label className="form-check-label" htmlFor="flexRadioDefault1">
                             Frontend
                         </label>
                     </div>
                     <div className="form-check">
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                        <label className="form-check-label" for="flexRadioDefault2">
+                        <label className="form-check-label" htmlFor="flexRadioDefault2">
                             Backend
                         </label>
                     </div>
@@ -48,13 +48,13 @@ const Filter = () => {
                 <div className='col-md-6'>
                     <div className="form-check">
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                        <label className="form-check-label" for="flexRadioDefault2">
+                        <label className="form-check-label" htmlFor="flexRadioDefault2">
                             Full Stack
                         </label>
                     </div>
                     <div className="form-check">
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                        <label className="form-check-label" for="flexRadioDefault2">
+                        <label className="form-check-label" htmlFor="flexRadioDefault2">
                             QA/Testing
                         </label>
                     </div>
@@ -68,37 +68,37 @@ const Filter = () => {
                 <div className='col-md-6'>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">React.js</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">React.js</label>
                     </div>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">UI Design</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">UI Design</label>
                     </div>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">PHP</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">PHP</label>
                     </div>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">Python</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Python</label>
                     </div>
                 </div>
                 <div className='col-md-6'>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">Angular.js</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Angular.js</label>
                     </div>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">Node.js</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Node.js</label>
                     </div>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">Scala</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Scala</label>
                     </div>
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        <label className="form-check-label" for="flexSwitchCheckDefault">C++</label>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">C++</label>
                     </div>
                 </div>
                 

@@ -3,7 +3,6 @@ import MatchDispProf from './MatchDispProf'
 import LikedDispProf from './LikedDispProf'
 const Matchdisplay = () => {
     const [displikeprof, setdisplikeprof] = useState(false)
-
     const matches = [
         {
             name: "Rahul",

@@ -3,13 +3,13 @@ import image from '../Image/avatar.jpeg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
+import axios from 'axios';
 
 const Profile = () => {
 
     const [projectlist, setProjectlist] = useState([])
-
     const [Profobj, setProfobj] = useState([])
-    
+    const [putdatadb, setputdatadb] = useState(false)
 
     const areaofinterestselect = (e) => {
         console.log(e);
@@ -29,7 +29,7 @@ const Profile = () => {
                 [r]: s
             }
         )
-        console.log(Profobj)
+        // console.log(Profobj)
     }
     const imageupload = (e) => {
         // const r = e.target.name
@@ -69,7 +69,7 @@ const Profile = () => {
     }
 
     const submitproject = (id) => {
-        
+
         setProjectlist(
             projectlist.map((pro) => {
                 if (pro.id === id) {
@@ -108,7 +108,18 @@ const Profile = () => {
     }, [projectlist])
 
 
+    const submitprofiledb = () => {
+        setputdatadb(true)
+    }
 
+    useEffect(() => {
+        axios.put('http://localhost:4000/api/v1/register', {
+            params : {email : ""}
+        },{
+            ...Profobj
+        }
+        )
+    }, [putdatadb])
 
 
     return (
@@ -147,7 +158,7 @@ const Profile = () => {
                     <div className='col-md-3'>
                         <h5>Area of Interest</h5>
                         <DropdownButton
-                            title= {Profobj.areaofinterest ? Profobj.areaofinterest : "Select Interest"} 
+                            title={Profobj.areaofinterest ? Profobj.areaofinterest : "Select Interest"}
                             id="dropdown-menu-align-right"
                             onSelect={areaofinterestselect}
                         >
@@ -162,7 +173,7 @@ const Profile = () => {
 
                     <div className='col-md-3'>
                         <h6>Industrial Experience </h6>
-                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value ={Profobj.industrialexp} placeholder='Title' />
+                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={Profobj.industrialexp} placeholder='Title' />
                     </div>
                 </div>
 
@@ -222,13 +233,13 @@ const Profile = () => {
                                         <br />
                                     </fieldset>
                                 }
-                                <button type='submit' onClick={() => submitproject(project.id)} className='btn btn-primary' disabled={project.edit}>Submit</button >
+                                {/* <button type='submit' onClick={() => submitproject(project.id)} className='btn btn-primary' disabled={project.edit}>Submit</button > */}
                             </div>
                         )
                     }
                     )
                 }
-
+                <button type="submit" onClick={submitprofiledb} className='btn btn-primary'>Submit</button>
             </div>
         </div>
     )

@@ -3,14 +3,13 @@ import avatar from "../Image/avatar.jpeg";
 // import ReactRoundedImage from "react-rounded-image";
 import "./Card.css";
 import {
-
   BsArrowLeftCircle,
   BsArrowRightCircle,
 } from "react-icons/bs";
 
 
 
-const Card = () => {
+const Card = (props) => {
   return (
     <div  >
       <div className="card">
@@ -28,7 +27,7 @@ const Card = () => {
             /> */}
           </div>
           <br></br>
-          <h5 className="card-title">Deepak Ahuja </h5>
+          <h5 className="card-title">depak </h5>
           <h5 className="card-title">Ahmedabad University </h5>
           <h5 className="card-title">React JS, Node JS </h5>
           <h5 className="card-title">Projects </h5>
