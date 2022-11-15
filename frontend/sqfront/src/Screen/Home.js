@@ -16,12 +16,13 @@ const Home = () => {
   useEffect ( ()=>{
     axios.get('http://localhost:4000/api/v1/getallusers')
     .then( (res)=>{
-      console.log(res.data)
+      
       setuserlist(res.data)
-
     })
   },[])
-  const [fuser , setfuser] = useState(user[0])
+
+
+  const fuser = user[2]
 
   return (
     <div>
