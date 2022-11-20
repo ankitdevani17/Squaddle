@@ -11,6 +11,7 @@ const Profile = () => {
     const [projectlist, setProjectlist] = useState([])
     const [Profobj, setProfobj] = useState([])
     const [putdatadb, setputdatadb] = useState(false)
+    const [cookies, setCookie, removeCookie] = useCookies(null)
 
     const areaofinterestselect = (e) => {
         console.log(e);
@@ -118,7 +119,8 @@ const Profile = () => {
         if (putdatadb) {
             axios.put('http://localhost:4000/api/v1/register',
                 {
-                name : "RAHULS"
+                name : "RAHULS",
+                email : cookies.email
                 },
                 { mode: 'cors' },
                 { withCredentials: true },

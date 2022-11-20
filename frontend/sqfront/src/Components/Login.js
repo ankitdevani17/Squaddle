@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie'
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [cookies, setCookie] = useCookies(['email', 'token'])
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [loginsuccess, setLoginsuccess] = React.useState(false)

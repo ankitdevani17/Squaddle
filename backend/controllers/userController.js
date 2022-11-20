@@ -24,7 +24,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
 //UserDetails put request 
 exports.userDetails = catchAsyncErrors(async (req, res, next) => {
-  const { email, token } = req.cookies;
+  const { email, token } = req.body;
   console.log("first");
   console.log(email, token, req, "hello");
   const user =  await User.findOne({ email })
