@@ -42,7 +42,8 @@ const Signup = () => {
                     password: password
                 },
                     { mode: 'cors' },
-                    { withCredentials: true }
+                    { withCredentials: true },
+                   
                 )
                     .then(() => {
                         // console.log("login successful")

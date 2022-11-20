@@ -1,5 +1,3 @@
-// Create Token and saving in cookie
-
 const sendToken = (user, statusCode, res) => {
     const token = user.getJWTToken();
     const email = user.email
@@ -16,7 +14,7 @@ const sendToken = (user, statusCode, res) => {
       success: true,
       user,
       token,
-
+      email
     });
   };
   

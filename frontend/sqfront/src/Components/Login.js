@@ -2,9 +2,14 @@ import React from 'react'
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import { useCookies } from 'react-cookie'
+
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [cookies, setCookie] = useCookies(['email', 'token'])
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [loginsuccess, setLoginsuccess] = React.useState(false)
@@ -21,11 +26,6 @@ const Login = () => {
         }
     }
 
-
-
-
-
-
     const login = ((e) => {
         e.preventDefault()
         axios.post("http://localhost:4000/api/v1/login", {
@@ -35,11 +35,18 @@ const Login = () => {
             { mode: 'cors' },
             { withCredentials: true }
         )
-            .then(() => {
+            .then((res) => {
                 // console.log(password)
+                console.log(res)
+                // localStorage.setItem("token", res.data.token)
+                // localStorage.setItem("email", res.data.email)   
+        setCookie('email', res.data.email)
+                setCookie('token',res.data.token)
                 setLoginsuccess(true)
                 setLoginfail(false)
                 dispatch(authActions.login())
+                dispatch(authActions.currentloggeduser({ email: email }))
+                navigate('/profile')
             })
             .catch(
                 () => {
