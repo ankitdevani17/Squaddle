@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import image from '../Image/avatar.jpeg'
+import { useCookies } from 'react-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -112,13 +113,27 @@ const Profile = () => {
         setputdatadb(true)
     }
 
+
     useEffect(() => {
-        axios.put('http://localhost:4000/api/v1/register', {
-            params : {email : ""}
-        },{
-            ...Profobj
+        if (putdatadb) {
+            axios.put('http://localhost:4000/api/v1/register',
+                {
+                name : "RAHULS"
+                },
+                { mode: 'cors' },
+                { withCredentials: true },
+                {
+                    cookies: {
+                        token: localStorage.getItem('token'),
+                        email: localStorage.getItem('email')
+                    }
+                }
+            )                .then((res) => {
+                    console.log(Profobj)
+                    console.log(res)
+                    setputdatadb(false)
+                })
         }
-        )
     }, [putdatadb])
 
 

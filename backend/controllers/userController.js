@@ -25,21 +25,22 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 //UserDetails put request 
 exports.userDetails = catchAsyncErrors(async (req, res, next) => {
   const { email, token } = req.cookies;
+  console.log("first");
+  console.log(email, token, req, "hello");
   const user =  await User.findOne({ email })
-
-  res.json({
-    success: true,
-    email,
-  });
-
+  
   // if(!email || !password){
-  //   return next(new ErrorHander("Please Enter Email and Password",400))
-
-
-  const update = req.body;
-  const opts = { new: true };
-
-  let doc = await User.findOneAndUpdate({ email }, update, opts);
+    //   return next(new ErrorHander("Please Enter Email and Password",400))
+    
+    
+    const update = req.body;
+    const opts = { new: true };
+    
+    let doc = await User.findOneAndUpdate({ email }, update, opts);
+    res.send({
+      success: true,
+      email,
+    });
 });
 
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {

@@ -13,16 +13,20 @@ const Home = () => {
   
   const [filteron, setfilteron] = useState(false)
   
+  const [userloaded, setuserloaded] = useState(false)
   useEffect ( ()=>{
     axios.get('http://localhost:4000/api/v1/getallusers')
-    .then( (res)=>{
-      
+    .then((res)=>{
+      if(res.data){
       setuserlist(res.data)
+      console.log(userloaded)
+      setuserloaded(true)
+      }
     })
   },[])
 
 
-  const fuser = user[2]
+  
 
   return (
     <div>
@@ -34,7 +38,10 @@ const Home = () => {
           <div className='col-md-2'>
           </div>
           <div className='col-md-4'>
-            <Card fuser={fuser} />
+            {
+              userloaded ? <Card fuser={user[2]}/> : "Loading"
+            }
+            
           </div>
             {/* <div className='col-md-1'>
             </div> */}

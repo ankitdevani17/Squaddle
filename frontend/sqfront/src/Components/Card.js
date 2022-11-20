@@ -5,14 +5,15 @@ import "./Card.css";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 
 const Card = (props) => {
-  const [userdata, setUserdata] = React.useState([]);
+  const [userdata, setUserdata] = React.useState(props.fuser);
 
-  useEffect(() => {
-    if (props?.fuser) {
-      setUserdata(props.fuser);
-      console.log(userdata);
-    }
-  }, [props.fuser]);
+  const leftswipecard = () => {
+
+  }
+  const rightswipecard = () =>{
+    
+  }
+  
 
   return (
     <div>
@@ -30,38 +31,32 @@ const Card = (props) => {
               hoverColor="#DD1144"
             /> */}
           </div>
-          <br></br>
-
+          <br/>
           {
-            props.fuser ? 
-            <>
+            props.fuser ?
 
-              <h5 className="card-title">{userdata.name} </h5>
-              <h5 className="card-title">{userdata.university} </h5>
-              <h5 className="card-title">React JS, Node JS </h5>
-              <h5 className="card-title">Projects </h5>
+              <>
+                <h5 className="card-title">{userdata?.name} </h5>
+                <h5 className="card-title">{userdata?.university} </h5>
+                <h5 className="card-title"> </h5>
+                <h5 className="card-title">Projects :: </h5>
+                <h5 className="card-title">{userdata.projects[0].title }</h5>
+                <h5 className="card-title">{userdata.projects[0].Description }</h5>
+                <h5 className="card-title">{userdata.projects[0].techstack}</h5>
+                <h5 className="card-title">Linkedin</h5>
+                <h5 className="card-title">YOE: {userdata.experience} yr</h5>
+                <div className="icons">
+                  <button type="button" onClick={leftswipecard} className="btn btn-danger round">
+                    {" "}
+                    <BsArrowLeftCircle size={50} />
+                  </button>
+                  <button type="button"  onClick = {rightswipecard} className="btn btn-success round">
+                    {" "}
+                    <BsArrowRightCircle size={50} />
+                  </button>
 
-
-             {
-              console.log(userdata.projects)
-             }
-              <h5 className="card-title">2. Title</h5>
-              <h5 className="card-title">Description</h5>
-              <h5 className="card-title">Tech Stack</h5>
-              <h5 className="card-title">Linkedin</h5>
-              <h5 className="card-title">YOE: {userdata.experience} yr</h5>
-              <div className="icons">
-                <button type="button" className="btn btn-danger round">
-                  {" "}
-                  <BsArrowLeftCircle size={50} />
-                </button>
-                <button type="button" className="btn btn-success round">
-                  {" "}
-                  <BsArrowRightCircle size={50} />
-                </button>
-
-              </div>
-            </> : "No user found"
+                </div>
+              </> : "No user found"
           }
         </div>
 
