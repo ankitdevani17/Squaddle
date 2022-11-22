@@ -46,7 +46,7 @@ const Login = () => {
                 setLoginfail(false)
                 dispatch(authActions.login())
                 dispatch(authActions.currentloggeduser({ email: email }))
-                navigate('/profile')
+                navigate('/')
             })
             .catch(
                 () => {
