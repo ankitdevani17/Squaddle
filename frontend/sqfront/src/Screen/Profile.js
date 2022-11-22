@@ -26,7 +26,7 @@ const Profile = () => {
         console.log(e);
         setProfobj({
             ...Profobj,
-            areaofinterest: e
+            role : e
         })
         console.log(Profobj);
     }
@@ -128,22 +128,17 @@ const Profile = () => {
         if (putdatadb) {
             axios.put('http://localhost:4000/api/v1/register',
                 {
-                name : "RAHULS",
-                email : cookies.email
+                    ...Profobj,
+                    email: cookies.email
                 },
                 { mode: 'cors' },
-                { withCredentials: true },
-                {
-                    cookies: {
-                        token: localStorage.getItem('token'),
-                        email: localStorage.getItem('email')
-                    }
-                }
-            )                .then((res) => {
-                    console.log(Profobj)
-                    console.log(res)
-                    setputdatadb(false)
-                })
+                { withCredentials: true }
+               
+            ).then((res) => {
+                console.log(Profobj)
+                console.log(res)
+                setputdatadb(false)
+            })
         }
     }, [putdatadb])
 
@@ -163,8 +158,8 @@ const Profile = () => {
                         <h5>University : </h5>
                         <input type='text' className='form-control' name="university" onChange={profinitialization} value={userdata.university?userdata.university:Profobj.university} placeholder='' />
                         {/* <h4>Social URLs</h4> */}
-                        <h5>Linkedin:  </h5>
-                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={userdata.linkedinURL?userdata.linkedinURL:Profobj.linkedinurl} placeholder='Linkedin Url' />
+                        <h5>Linkedin :  </h5>
+                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={Profobj.linkedinurl} placeholder='Linkedin Url' />
                     </div>
                     <div className='col-md-1'>
                     </div>
@@ -174,8 +169,8 @@ const Profile = () => {
                             <textarea className="form-control" name="bio" onChange={profinitialization} value={userdata.bio?userdata.bio:Profobj.bio} placeholder="" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
                             <label  >Short Intro about yourself </label>
                         </div>
-                        <h5>Twitter:  </h5>
-                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={userdata.twitterURL?userdata.twitterURL:Profobj.twitterurl} placeholder='' />
+                        <h5>Twitter :  </h5>
+                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={Profobj.twitterurl} placeholder='' />
 
                     </div>
                 </div>
@@ -184,9 +179,10 @@ const Profile = () => {
                     <div className='col-md-3'>
                         <h5>Area of Interest</h5>
                         <DropdownButton
-                            title={Profobj.areaofinterest ? Profobj.areaofinterest : "Select Interest"}
+                            title={Profobj.role ? Profobj.role : "Select Interest"}
                             id="dropdown-menu-align-right"
                             onSelect={areaofinterestselect}
+
                         >
                             <Dropdown.Item eventKey="Frontend">Frontend</Dropdown.Item>
                             <Dropdown.Item eventKey="Backend">Backend</Dropdown.Item>
@@ -199,7 +195,7 @@ const Profile = () => {
 
                     <div className='col-md-3'>
                         <h6>Industrial Experience </h6>
-                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={userdata.experience?userdata.experience:Profobj.industrialexp} placeholder='Title' />
+                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={Profobj.industrialexp} placeholder='Title' />
                     </div>
                 </div>
 
