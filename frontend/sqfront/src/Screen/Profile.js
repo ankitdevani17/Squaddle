@@ -159,7 +159,7 @@ const Profile = () => {
                         <input type='text' className='form-control' name="university" onChange={profinitialization} value={userdata.university?userdata.university:Profobj.university} placeholder='' />
                         {/* <h4>Social URLs</h4> */}
                         <h5>Linkedin :  </h5>
-                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={Profobj.linkedinurl} placeholder='Linkedin Url' />
+                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={userdata.linkedinURL?userdata.linkedinURL:Profobj.linkedinurl} placeholder='Linkedin Url' />
                     </div>
                     <div className='col-md-1'>
                     </div>
@@ -170,7 +170,7 @@ const Profile = () => {
                             <label  >Short Intro about yourself </label>
                         </div>
                         <h5>Twitter :  </h5>
-                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={Profobj.twitterurl} placeholder='' />
+                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={userdata.twitterURL?userdata.twitterURL:Profobj.twitterurl} placeholder='' />
 
                     </div>
                 </div>
@@ -195,7 +195,7 @@ const Profile = () => {
 
                     <div className='col-md-3'>
                         <h6>Industrial Experience </h6>
-                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={Profobj.industrialexp} placeholder='Title' />
+                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={userdata.experience?userdata.experience:Profobj.industrialexp} placeholder='Title' />
                     </div>
                 </div>
 
