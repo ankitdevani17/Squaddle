@@ -5,12 +5,16 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from '../store/auth-slice'
+import { useCookies } from 'react-cookie'
 
 function Navb() {
   const dispatch = useDispatch()
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const logout = () => {
     dispatch(authActions.logout())
+    removeCookie('token')
+    removeCookie('email')
   }
 
 

@@ -19,26 +19,15 @@ const App = () => {
         <BrowserRouter>
           <Navb />
           <Routes>
-      
-            {
-
-            }
-
             <Route path="/" element={isLoggedIn ? <Home /> : <LoginSignup />} />
             <Route path="/about" element={<Aboutus />} />
-
             <Route path="/login" element={<LoginSignup />} />
-
             <Route path="/profile" element={isLoggedIn ? <Profile /> : <LoginSignup />} />
             <Route path="/dm" element={isLoggedIn ? <Message /> : <LoginSignup />} />
             <Route path='*' element={<h1>404 Not Found</h1>} />
-
-
           </Routes>
           <Footer />
-
         </BrowserRouter>
-
       </>
     </div>
   )

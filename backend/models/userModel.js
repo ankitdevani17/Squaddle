@@ -82,7 +82,8 @@ const userSchema = new mongoose.Schema({
       repo:String,
       mentor:String,
       duration:Number,
-      frameworks : String
+      frameworks : String,
+      
     }
   ]
 ,

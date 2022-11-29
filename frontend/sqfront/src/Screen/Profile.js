@@ -12,12 +12,21 @@ const Profile = () => {
     const [Profobj, setProfobj] = useState([])
     const [putdatadb, setputdatadb] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies(null)
+    const [userdata, setUserdata] = useState([])
+    useEffect ( ()=>{
+        axios.get('http://localhost:4000/api/v1/userinfo?email=a@g.co')
+        .then((res)=>{
+          if(res.data){
+          setUserdata(res.data)
+          }
+        })
+      },[])
 
     const areaofinterestselect = (e) => {
         console.log(e);
         setProfobj({
             ...Profobj,
-            areaofinterest: e
+            role : e
         })
         console.log(Profobj);
     }
@@ -118,22 +127,17 @@ const Profile = () => {
         if (putdatadb) {
             axios.put('http://localhost:4000/api/v1/register',
                 {
-                name : "RAHULS",
-                email : cookies.email
+                    ...Profobj,
+                    email: cookies.email
                 },
                 { mode: 'cors' },
-                { withCredentials: true },
-                {
-                    cookies: {
-                        token: localStorage.getItem('token'),
-                        email: localStorage.getItem('email')
-                    }
-                }
-            )                .then((res) => {
-                    console.log(Profobj)
-                    console.log(res)
-                    setputdatadb(false)
-                })
+                { withCredentials: true }
+               
+            ).then((res) => {
+                console.log(Profobj)
+                console.log(res)
+                setputdatadb(false)
+            })
         }
     }, [putdatadb])
 
@@ -148,24 +152,24 @@ const Profile = () => {
                     </div>
 
                     <div className='col-md-4'>
-                        <h5>Name : </h5>
-                        <input type='text' className='form-control' name="name" onChange={profinitialization} value={Profobj.name} placeholder='' />
+                        <h5>Name: </h5>
+                        <input type='text' className='form-control' name="name" onChange={profinitialization} value={userdata.name?userdata.name:Profobj.name} placeholder='' />
                         <h5>University : </h5>
-                        <input type='text' className='form-control' name="university" onChange={profinitialization} value={Profobj.university} placeholder='' />
+                        <input type='text' className='form-control' name="university" onChange={profinitialization} value={userdata.university?userdata.university:Profobj.university} placeholder='' />
                         {/* <h4>Social URLs</h4> */}
                         <h5>Linkedin :  </h5>
-                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={Profobj.linkedinurl} placeholder='Linkedin Url' />
+                        <input type='text' className='form-control' name="linkedinurl" onChange={profinitialization} value={userdata.linkedinURL?userdata.linkedinURL:Profobj.linkedinurl} placeholder='Linkedin Url' />
                     </div>
                     <div className='col-md-1'>
                     </div>
                     <div className='col-md-4'>
                         <h5>Short Bio</h5>
                         <div className="form-floating">
-                            <textarea className="form-control" name="bio" onChange={profinitialization} value={Profobj.bio} placeholder="" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
+                            <textarea className="form-control" name="bio" onChange={profinitialization} value={userdata.bio?userdata.bio:Profobj.bio} placeholder="" id="floatingTextarea2" style={{ height: "110px" }}></textarea>
                             <label  >Short Intro about yourself </label>
                         </div>
                         <h5>Twitter :  </h5>
-                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={Profobj.twitterurl} placeholder='' />
+                        <input type='text' className='form-control' name="twitterurl" onChange={profinitialization} value={userdata.twitterURL?userdata.twitterURL:Profobj.twitterurl} placeholder='' />
 
                     </div>
                 </div>
@@ -174,9 +178,10 @@ const Profile = () => {
                     <div className='col-md-3'>
                         <h5>Area of Interest</h5>
                         <DropdownButton
-                            title={Profobj.areaofinterest ? Profobj.areaofinterest : "Select Interest"}
+                            title={Profobj.role ? Profobj.role : "Select Interest"}
                             id="dropdown-menu-align-right"
                             onSelect={areaofinterestselect}
+
                         >
                             <Dropdown.Item eventKey="Frontend">Frontend</Dropdown.Item>
                             <Dropdown.Item eventKey="Backend">Backend</Dropdown.Item>
@@ -189,7 +194,7 @@ const Profile = () => {
 
                     <div className='col-md-3'>
                         <h6>Industrial Experience </h6>
-                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={Profobj.industrialexp} placeholder='Title' />
+                        <input type='text' className='form-control' name="industrialexp" onChange={profinitialization} value={userdata.experience?userdata.experience:Profobj.industrialexp} placeholder='Title' />
                     </div>
                 </div>
 
@@ -211,37 +216,37 @@ const Profile = () => {
                                         <div className='row'>
                                             <div className='col-md-3'>
                                                 <h6>Title</h6>
-                                                <input type='text' className='form-control' name='title' onChange={(e) => { textupdate(e, ind) }} />
+                                                <input type='text' className='form-control' name='title' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.title} />
                                                 <h6>Group Size</h6>
-                                                <input type='number' className='form-control' name='grpsize' onChange={(e) => { textupdate(e, ind) }} placeholder='Group Size' />
+                                                <input type='number' className='form-control' name='grpsize' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.groupsize} placeholder='Group Size' />
                                                 <h6>Deployed Link (if any)</h6>
-                                                <input type='text' className='form-control' name='link' onChange={(e) => { textupdate(e, ind) }} placeholder='Group Size' />
+                                                <input type='text' className='form-control' name='link' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.link} placeholder='Link' />
                                             </div>
                                             <div className='col-1'>
                                             </div>
                                             <div className='col-md-4'>
                                                 <h5>Description of Project and Outcomes</h5>
                                                 <div className="form-floating">
-                                                    <textarea className="form-control" name='desc' onChange={(e) => { textupdate(e, ind) }} placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
+                                                    <textarea className="form-control" name='desc' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.description} placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: "100px" }}></textarea>
                                                     <label > Summary</label>
                                                 </div>
 
                                                 <h6>Github Repo</h6>
-                                                <input type='text' className='form-control' name="repo" onChange={(e) => { textupdate(e, ind) }} placeholder='Github Repository' />
+                                                <input type='text' className='form-control' name="repo" onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.repo} placeholder='Github Repository' />
                                             </div>
                                             <div className='col-1'>
                                             </div>
                                             <div className='col-md-3'>
                                                 <h6>Mentor of the Project</h6>
-                                                <input type='text' className='form-control' name='mentor' onChange={(e) => { textupdate(e, ind) }} placeholder='Title' />
+                                                <input type='text' className='form-control' name='mentor' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.mentor} placeholder='Title' />
                                                 <h6>Duration of Project </h6>
-                                                <input type='number' className='form-control' name='duration' onChange={(e) => { textupdate(e, ind) }} placeholder='Title' />
+                                                <input type='number' className='form-control' name='duration' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.duration} placeholder='Title' />
 
 
                                             </div>
                                             <h6>Frameworks Used </h6>
                                             <div className="form">
-                                                <input type='text' className='form-control' name='techstack' onChange={(e) => { textupdate(e, ind) }} placeholder='Tech Stack used' />
+                                                <input type='text' className='form-control' name='techstack' onChange={(e) => { textupdate(e, ind) }} value={userdata.projects.frameworks} placeholder='Tech Stack used' />
                                             </div>
 
 
@@ -258,6 +263,7 @@ const Profile = () => {
                 <button type="submit" onClick={submitprofiledb} className='btn btn-primary'>Submit</button>
             </div>
         </div>
+        
     )
 }
 
