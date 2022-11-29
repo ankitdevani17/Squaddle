@@ -107,9 +107,12 @@ exports.addMatch =  catchAsyncErrors(async (req, res, next) => {
 
 const {email, matchedEmail} = req.body
 const query = {email : email}
+// console.log(matchedEmail)
+const matchedUser = await User.findOne({email : matchedEmail})
+// console.log(matchedUser.name)
 
 const updateMatch = {
-  $push : {matches : {email: matchedEmail}},
+  $push : {matches : {email: matchedEmail, name:matchedUser.name }}, // adding name to display on dashboard- matches list 
 
 }
 

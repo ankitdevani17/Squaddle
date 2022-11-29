@@ -84,7 +84,7 @@ const Profile = () => {
             })
         )
     }
-
+                                    
     const addProject = () => {
         setProjectlist((projectlist) => {
             return (
@@ -97,7 +97,6 @@ const Profile = () => {
                 ]
             )
         })
-
 
     }
 
