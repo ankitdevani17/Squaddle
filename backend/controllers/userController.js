@@ -150,7 +150,7 @@ res.json(users)
 // Get Messages by from_userId and to_userId
 
 exports.getMessage=  catchAsyncErrors(async (req, res, next) => {
-  const {from_email, to_email} = req.body
+  const {from_email, to_email} = req.params
   
   const query = {
     from_email:from_email, to_email :  to_email
