@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Message.css";
+import axios from "axios"
+
 import Conversation from "../Components/Conversation";
 import Text from "../Components/Text";
 import ChatOnline from "../Components/ChatOnline";
 import photo from "../Image/about-bg1.jpeg";
 import photo1 from "../Image/avatar.jpeg";
 import { useCookies } from "react-cookie";
+
+
+
 function Message() {
+  const getMessage = async ()=>{
+   
+    // setCurrConvo(res.data)
+    // console.log(res)
+  }
+
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [currentreceivinguser, setcurrentreceivinguser] = React.useState("");
+  const [currentreceivinguser, setcurrentreceivinguser] = React.useState("Ankit");
+const[convo,setCurrConvo]= React.useState([])
   const [conversations, setConversations] = React.useState([
     {
       from_email: "a@g.co",
@@ -38,6 +50,23 @@ function Message() {
   const currentchattinguser = (e) => {
     setcurrentreceivinguser(e.target.value);
   };
+
+  useEffect (()=>{
+    axios
+    .get(`http://localhost:4000/api/v1/message`,{
+      from_email : "a@g.co",
+      to_email:"ankitdevani17@gmail.com"
+    })
+    .then((res) => {
+      if (res.data) {
+        // setcurruser(res.data);
+        console.log(res)
+      }
+    })
+    .catch((err) => {
+      // console.log(err)
+    });
+    },[])
   return (
     <>
       <div className="message">
@@ -49,6 +78,7 @@ function Message() {
               curruser={currentreceivinguser}
               pic={photo}
             />
+             <button className="chatSubmitButton" onClick = {getMessage}> Chat with Ankit</button>
           </div>
         </div>
         <div className="chatBox">
