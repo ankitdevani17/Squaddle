@@ -4,19 +4,18 @@
 // import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from '../store/auth-slice'
-import { useCookies } from 'react-cookie'
+import { authActions } from "../store/auth-slice";
+import { useCookies } from "react-cookie";
 
 function Navb() {
-  const dispatch = useDispatch()
-  const [cookies, setCookie, removeCookie] = useCookies(['user'])
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+  const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const logout = () => {
-    dispatch(authActions.logout())
-    removeCookie('token')
-    removeCookie('email')
-  }
-
+    dispatch(authActions.logout());
+    removeCookie("token");
+    removeCookie("email");
+  };
 
   return (
     <>
@@ -49,28 +48,29 @@ function Navb() {
                   About Us
                 </Link>
               </li>
-             
+
               <li className="nav-item">
-                {
-                  isLoggedIn &&
+                {isLoggedIn && (
                   <Link to="/dm" className="nav-link" href="#">
-                  Message
-                </Link>
-                }
+                    Message
+                  </Link>
+                )}
               </li>
             </ul>
             <form className="d-flex">
               <Link to="/profile">
-                {
-                  isLoggedIn &&
+                {isLoggedIn && (
                   <button className="btn btn-outline-success" type="submit">
                     Edit Profile
                   </button>
-
-                }
+                )}
               </Link>
               <Link to="/login">
-                <button className="btn btn-outline-success" onClick={logout} type="submit">
+                <button
+                  className="btn btn-outline-success"
+                  onClick={logout}
+                  type="submit"
+                >
                   Logout
                 </button>
               </Link>

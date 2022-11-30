@@ -1,55 +1,28 @@
-import React, { useState } from 'react'
-import MatchDispProf from './MatchDispProf'
-import LikedDispProf from './LikedDispProf'
-const Matchdisplay = () => {
-    const [displikeprof, setdisplikeprof] = useState(false)
-    const matches = [
-        {
-            name: "Rahul",
-            img: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1060&t=st=1666327705~exp=1666328305~hmac=5b91ccd010fc3b2ee94de3a84fdde39c87684d8e7717ea0cae53af9dee609687"
-        },
-        {
-            name: "Rahul",
-            img: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1060&t=st=1666327705~exp=1666328305~hmac=5b91ccd010fc3b2ee94de3a84fdde39c87684d8e7717ea0cae53af9dee609687"
-        },
-        {
-            name: "Rahul",
-            img: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1060&t=st=1666327705~exp=1666328305~hmac=5b91ccd010fc3b2ee94de3a84fdde39c87684d8e7717ea0cae53af9dee609687"
-        },
-        {
-            name: "Rahul",
-            img: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1060&t=st=1666327705~exp=1666328305~hmac=5b91ccd010fc3b2ee94de3a84fdde39c87684d8e7717ea0cae53af9dee609687"
-        },
-        {
-            name: "Rahul",
-            img: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1060&t=st=1666327705~exp=1666328305~hmac=5b91ccd010fc3b2ee94de3a84fdde39c87684d8e7717ea0cae53af9dee609687"
-        },
-        {
-            name: "Rahul",
-            img: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=1060&t=st=1666327705~exp=1666328305~hmac=5b91ccd010fc3b2ee94de3a84fdde39c87684d8e7717ea0cae53af9dee609687"
-        },
+import React, { useEffect, useState } from "react";
+import MatchDispProf from "./MatchDispProf";
+import LikedDispProf from "./LikedDispProf";
+const Matchdisplay = (props) => {
+  const [displikeprof, setdisplikeprof] = useState(false);
+  const [match, setmatch] = useState(props?.userinfo.matches ? props.userinfo.matches : []);
 
-    ]
-    return (
-        <div style={{ backgroundColor: "yellow  " }}>
-            <div className='container text-center'>
-                <h3>
-                    My Matches
-                </h3>
-                <div className='row'>
-                    {
-                        matches.map((match) => {
-                            return (
-                                <>
-                                    <MatchDispProf name={match.name} img={match.img} />
-                                </>
-                            )
-                        }
-                        )
-                    }
-                </div>
-            </div>
-            <button type='button' onClick={() => setdisplikeprof(!displikeprof)} className='btn btn-primary mx-5'> {displikeprof ? "+" : "-"} </button>
+  useEffect( ()=>{
+    setmatch(props?.userinfo.matches ? props.userinfo.matches : []);
+  },[props.userinfo.matches])
+  return (
+    <div style={{ backgroundColor: "yellow  " }}>
+      <div className="container text-center">
+        <h3>My Matches</h3>
+        <div className="row">
+          {match.map((mat) => {
+            return (
+              <div key={mat.name}>
+                <MatchDispProf name={mat.name} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* <button type='button' onClick={() => setdisplikeprof(!displikeprof)} className='btn btn-primary mx-5'> {displikeprof ? "+" : "-"} </button>
             {
                 !displikeprof
 
@@ -72,11 +45,9 @@ const Matchdisplay = () => {
                         }
                     </div>
                 </div>
-            }
+            } */}
+    </div>
+  );
+};
 
-
-        </div>
-    )
-}
-
-export default Matchdisplay
+export default Matchdisplay;

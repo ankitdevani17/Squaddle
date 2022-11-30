@@ -9,7 +9,6 @@ const LoginSignup = () => {
     const toggleauth = () =>{
         setToggle(!toggle);
     }
-
     return (
         <div>
             <div className='container'>
@@ -23,14 +22,9 @@ const LoginSignup = () => {
                     <div className='col-md-4'>
                     </div>
                 </div>
-
-
                 {
                     toggle ? <Login /> : <Signup />
                 }
-                
-
-
 
             </div>
         </div>
