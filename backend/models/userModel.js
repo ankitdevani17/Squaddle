@@ -31,6 +31,13 @@ const userSchema = new mongoose.Schema({
   }
     
   ],
+  // // matches :[
+  // //   {
+  // //   email : String,
+  // //   name : String
+  // // }
+    
+  // ],
   leftSwipe :[
     {
     email : String}

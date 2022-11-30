@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, logout, loginUser, userDetails, userInfo, addMatch, getAllUsers,leftSwipe,addMessage, getMessage} = require("../controllers/userController");
+const { registerUser, logout, loginUser, userDetails, userInfo, addMatch, getAllUsers,leftSwipe,addMessage, getMessage,getMatchedUser} = require("../controllers/userController");
 const router =  express.Router();
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser)
@@ -11,4 +11,5 @@ router.route("/getallusers").get(getAllUsers)
 router.route("/leftswipe").put(leftSwipe)
 router.route("/message").post(addMessage)
 router.route("/message").get(getMessage)
+router.route("/matchedUser").get(getMatchedUser)
 module.exports=router;

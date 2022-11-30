@@ -113,14 +113,39 @@ const matchedUser = await User.findOne({email : matchedEmail})
 
 const updateMatch = {
   $push : {matches : {email: matchedEmail, name:matchedUser.name }}, // adding name to display on dashboard- matches list 
-
+  // $push : {acceptedmatches : {email: matchedEmail, name:matchedUser.name }},
 }
+
 
 const user = await User.updateOne(query, updateMatch)
 res.json(user)
 
 });
 
+
+// Matchuser list 
+
+
+exports.getMatchedUser =  catchAsyncErrors(async (req, res, next) => {
+  const emails = JSON.parse(req.query.emails)
+  // console.log(req.query.emails)
+  // console.log(emails)
+  const pipeline =
+  [
+      {
+          '$match': {
+              'email': {
+                  '$in': emails
+              }
+          }
+      }
+  ]
+
+const foundUsers = await User.aggregate(pipeline)
+// console.log(foundUsers)
+res.json(foundUsers)
+  
+})
 
 // Swipe left and remove from users list 
 exports.leftSwipe=  catchAsyncErrors(async (req, res, next) => {
@@ -156,7 +181,7 @@ exports.getMessage=  catchAsyncErrors(async (req, res, next) => {
   const query = {
     from_email:from_email, to_email :  to_email
 }
-
+a
 const foundMessages = await Message.find(query)
 res.send(foundMessages)
 
