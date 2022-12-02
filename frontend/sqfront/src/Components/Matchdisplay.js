@@ -3,21 +3,25 @@ import MatchDispProf from "./MatchDispProf";
 import LikedDispProf from "./LikedDispProf";
 const Matchdisplay = (props) => {
   const [displikeprof, setdisplikeprof] = useState(false);
-  const [match, setmatch] = useState(props?.userinfo.matches ? props.userinfo.matches : []);
+  const [match, setmatch] = useState(
+    props?.userinfo.matches ? props.userinfo.matches : []
+  );
 
-  useEffect( ()=>{
-    setmatch(props?.userinfo.matches ? props.userinfo.matches : []);
-  },[props.userinfo.matches])
+  useEffect(() => {
+      setmatch(props?.userinfo.matches ? props.userinfo.matches : []);
+      
+  }, [props.userinfo.matches]);
   return (
     <div style={{ backgroundColor: "yellow  " }}>
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
+          {
+            // console.log(match)
+          }
           {match.map((mat) => {
             return (
-              <div key={mat.name}>
-                <MatchDispProf name={mat.name} />
-              </div>
+                <MatchDispProf key={mat.name} name={mat.name} />
             );
           })}
         </div>

@@ -52,13 +52,13 @@ const Home = () => {
           <div className="col-md-4">
             {userloaded
               ? user.map((item) => {
-                  // if (item.email !== userlog.email) {
+                  if (item.email !== userlog.email) {
                     return (
                       <div key={item.id}>
                         <Card fuser={item} />
                       </div>
                     );
-                  // }
+                  }
                 })
               : "Loading"}
           </div>
