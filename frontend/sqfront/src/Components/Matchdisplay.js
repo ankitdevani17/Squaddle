@@ -9,34 +9,34 @@ const Matchdisplay = (props) => {
   );
   const [matcharr, setmatcharr] = useState([]);
 
-
   useEffect(() => {
-    let temparr = []
+    let temparr = [];
     let temp = match.filter((item) => {
       if (matcharr.find((matcharr) => matcharr === item.email)) {
       } else {
         temparr.push({ name: item.name, email: item.email });
-        setmatcharr(temparr);
+        // setmatcharr(temparr);
       }
     });
-    // console.log(props.user);
-    // console.log(matcharr)
-    
+
     let finalmatcharr = [];
-    for (let i = 0; i < matcharr.length; i++) {
+    for (let i = 0; i < temparr.length; i++) {
       let temp = props.user.filter((item) => {
-        if (item.email === matcharr[i].email  ) {
+        if (item.email === temparr[i].email) {
           if (item.matches.find((ite) => ite.email === props.email)) {
-            // console.log("hello ")
-            finalmatcharr.push({name : matcharr[i].name , email : matcharr[i].email});
+            
+            finalmatcharr.push({
+              name: temparr[i].name,
+              email: temparr[i].email,
+            });
           }
         }
       });
     }
-    // console.log(finalmatcharr)
     setmatcharr(finalmatcharr);
-
   }, [props.userinfo.matches]);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     setmatch(props?.userinfo.matches ? props.userinfo.matches : []);
@@ -46,15 +46,17 @@ const Matchdisplay = (props) => {
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
-          {matcharr.map((mat) => {
-            return (
-              <MatchDispProf
-                key={mat.name}
-                matcharr={matcharr}
-                name={mat.name}
-              />
-            );
-          })}
+          {matcharr
+            ? matcharr.map((mat) => {
+                return (
+                  <MatchDispProf
+                    key={mat.name}
+                    matcharr={matcharr}
+                    name={mat.name}
+                  />
+                );
+              })
+            : "No match found"}
         </div>
       </div>
       {/* <button type='button' onClick={() => setdisplikeprof(!displikeprof)} className='btn btn-primary mx-5'> {displikeprof ? "+" : "-"} </button>

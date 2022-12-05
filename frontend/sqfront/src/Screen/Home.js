@@ -8,23 +8,32 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 const Home = () => {
-
   const userlog = useSelector((state) => state.auth.user);
-const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [cookies, setCookie, removeCookie] = useCookies(null);
   const [user, setuserlist] = useState([]);
   const [filteron, setfilteron] = useState(false);
   const [curruser, setcurruser] = useState({});
   const [userloaded, setuserloaded] = useState(false);
+  const [userinpendinglist, setuserinpendinglist] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
         // console.log(userloaded);
         setuserloaded(true);
+        setuserinpendinglist(res.data);
         // console.log(res.data);
       }
     });
   }, []);
+
+  useEffect ( ()=>{
+    // let temparr = []
+    // let temp = userinpendinglist.filter ( (item)=>{
+
+    // })
+    
+  },[])
 
   useEffect(() => {
     if (userlog) {
@@ -47,7 +56,11 @@ const [cookies, setCookie, removeCookie] = useCookies(null);
       <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <Matchdisplay user={user} userinfo={curruser}  email ={cookies.email}/>
+            <Matchdisplay
+              user={user}
+              userinfo={curruser}
+              email={cookies.email}
+            />
           </div>
           <div className="col-md-2"></div>
           <div className="col-md-4">
