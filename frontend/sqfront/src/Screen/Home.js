@@ -45,25 +45,34 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // setuserloaded(false)
+    
     let temparr = [];
     let temp = user.filter((item) => {
       if (item.email !== cookies.email) {
-        if (!curruser.matches.find((ite) => ite.email === item.email)) {
+        // console.log(curruser)
+        if (curruser.matches.find((ite) => ite.email === item.email) ) {
+        }
+        else if(curruser.leftSwipe.find (  (ite) =>  ite.email === item.email)){
+        }
+        else{
           temparr.push(item);
-          console.log("hello 1");
         }
       }
     });
-    // console.log(temparr)
-    
-    // console.log(userinpendinglist)
-    // console.log(userinpendinglist?.length, user.length, curruser.matches.length)
 
-    if(userinpendinglist?.length < user.length && curruser.matches?.length>0){
+    console.log(temparr)
+    if(userinpendinglist?.length < user.length &&  (curruser.matches?.length>0 || curruser.leftSwipe?.length>0) ){
       setuserloaded(true)
       setuserinpendinglist(temparr);
     }
+    else if(curruser.matches?.length ===0 &&  curruser.leftSwipe?.length ===0){
+      setuserloaded(true)
+      setuserinpendinglist(user);
+    }
+    else{
+      setuserinpendinglist(temparr);
+    }
+    // console.log(userinpendinglist)
   },[user]);
 
   
@@ -85,7 +94,7 @@ const Home = () => {
                   if (item.email !== userlog.email) {
                     return (
                       <div key={item.id}>
-                        <Card fuser={item} />
+                        <Card fuser={item} email={cookies.email} />
                       </div>
                     );
                   }
