@@ -55,19 +55,18 @@ const Home = () => {
         }
       }
     });
-    console.log(temparr)
-    setuserinpendinglist(temparr);
+    // console.log(temparr)
+    
     // console.log(userinpendinglist)
     // console.log(userinpendinglist?.length, user.length, curruser.matches.length)
 
     if(userinpendinglist?.length < user.length && curruser.matches?.length>0){
       setuserloaded(true)
+      setuserinpendinglist(temparr);
     }
-  },[]);
+  },[user]);
 
-  useEffect(() => {
-
-  }, []);
+  
   return (
     <div>
       <div className="container">
