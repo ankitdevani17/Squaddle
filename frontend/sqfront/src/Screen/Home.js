@@ -5,12 +5,13 @@ import { authActions } from "../store/auth-slice";
 import Filter from "../Components/Filter";
 import Matchdisplay from "../Components/Matchdisplay";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
+
   const userlog = useSelector((state) => state.auth.user);
-
+const [cookies, setCookie, removeCookie] = useCookies(null);
   const [user, setuserlist] = useState([]);
-
   const [filteron, setfilteron] = useState(false);
   const [curruser, setcurruser] = useState({});
   const [userloaded, setuserloaded] = useState(false);
@@ -46,7 +47,7 @@ const Home = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <Matchdisplay  userinfo = {curruser}/>
+            <Matchdisplay user={user} userinfo={curruser}  email ={cookies.email}/>
           </div>
           <div className="col-md-2"></div>
           <div className="col-md-4">
