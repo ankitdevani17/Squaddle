@@ -47,20 +47,23 @@ const Home = () => {
   useEffect(() => {
     
     let temparr = [];
+    if(curruser && user){
     let temp = user.filter((item) => {
       if (item.email !== cookies.email) {
-        // console.log(curruser)
+        // console.log(curruser, cookies.email)
+
         if (curruser.matches.find((ite) => ite.email === item.email) ) {
         }
-        else if(curruser.leftSwipe.find (  (ite) =>  ite.email === item.email)){
+        else if(curruser.leftSwipe.find((ite) =>  ite.email === item.email)){
         }
         else{
           temparr.push(item);
         }
       }
     });
+  }
 
-    console.log(temparr)
+    // console.log(temparr)
     if(userinpendinglist?.length < user.length &&  (curruser.matches?.length>0 || curruser.leftSwipe?.length>0) ){
       setuserloaded(true)
       setuserinpendinglist(temparr);
