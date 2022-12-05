@@ -19,21 +19,13 @@ const Home = () => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
-        // console.log(userloaded);
-        setuserloaded(true);
-        setuserinpendinglist(res.data);
+        
+        // setuserloaded(true);
+        // setuserinpendinglist(res.data);
         // console.log(res.data);
       }
     });
   }, []);
-
-  useEffect ( ()=>{
-    // let temparr = []
-    // let temp = userinpendinglist.filter ( (item)=>{
-
-    // })
-    
-  },[])
 
   useEffect(() => {
     if (userlog) {
@@ -51,6 +43,31 @@ const Home = () => {
         });
     }
   }, []);
+
+  useEffect(() => {
+    // setuserloaded(false)
+    let temparr = [];
+    let temp = user.filter((item) => {
+      if (item.email !== cookies.email) {
+        if (!curruser.matches.find((ite) => ite.email === item.email)) {
+          temparr.push(item);
+          console.log("hello 1");
+        }
+      }
+    });
+    console.log(temparr)
+    setuserinpendinglist(temparr);
+    // console.log(userinpendinglist)
+    // console.log(userinpendinglist?.length, user.length, curruser.matches.length)
+
+    if(userinpendinglist?.length < user.length && curruser.matches?.length>0){
+      setuserloaded(true)
+    }
+  },[]);
+
+  useEffect(() => {
+
+  }, []);
   return (
     <div>
       <div className="container">
@@ -65,7 +82,7 @@ const Home = () => {
           <div className="col-md-2"></div>
           <div className="col-md-4">
             {userloaded
-              ? user.map((item) => {
+              ? userinpendinglist.map((item) => {
                   if (item.email !== userlog.email) {
                     return (
                       <div key={item.id}>
