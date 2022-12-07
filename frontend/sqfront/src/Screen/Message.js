@@ -17,6 +17,7 @@ function Message() {
   const [toemailuser, settoemailuser] = useState("");
   const [currmsg, setcurrmsg] = useState("");
   const [isSend, setIsSend] = useState(true);
+  const [formattedTime, setFormattedTime] = useState("");
 
   useEffect(() => {
     axios
@@ -120,6 +121,12 @@ function Message() {
   }, [convo, convo1, sendmsgclick]);
 
   const sendmessage = () => {
+    var newTime = new Date().toLocaleTimeString( navigator.language, {
+      hour: '2-digit',
+      minute:'2-digit'
+    });
+    console.log("newtime is ",newTime);
+    // setFormattedTime(newTime);
     console.log(currmsg);
     setIsSend(true);
     console.log("hello bhai print karo ");
@@ -128,9 +135,10 @@ function Message() {
         from_email: cookies.email,
         to_email: toemailuser,
         message: currmsg,
+        timestamp : newTime
       })
       .then((res) => {
-        console.log("msg delivered");
+        console.log(newTime);
         setcurrmsg("");
         messageSent();
         reverseMessageSent();
@@ -171,7 +179,7 @@ function Message() {
                       {cookies.email === item.to_email ? (
                         <Text message={item.message} item={item} />
                       ) : (
-                        <Text own={true} message={item.message} item={item} />
+                        <Text own={true} message={item.message} item={item}  />
                       )}
                     </>
                   );

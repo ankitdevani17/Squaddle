@@ -3,9 +3,8 @@ const validator = require("validator")
 
 const messageSchema = new mongoose.Schema({
 timestamp : {
-        type: Date,
-        default: Date.now(),
-    
+        type: String,
+        // default: new Date (), 
 },
 
 from_email : { type: String},
