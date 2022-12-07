@@ -169,9 +169,9 @@ messageSent()
                   return (
                     <>
                       {cookies.email === item.to_email ? (
-                        <Text message={item.message} />
+                        <Text message={item.message} item={item} />
                       ) : (
-                        <Text own={true} message={item.message} />
+                        <Text own={true} message={item.message} item={item} />
                       )}
                     </>
                   );

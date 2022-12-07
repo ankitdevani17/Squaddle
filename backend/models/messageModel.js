@@ -4,7 +4,7 @@ const validator = require("validator")
 const messageSchema = new mongoose.Schema({
 timestamp : {
         type: Date,
-        default: Date.now,
+        default: Date.now(),
     
 },
 
