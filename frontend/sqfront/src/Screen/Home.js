@@ -16,6 +16,7 @@ const Home = () => {
   const [filteron, setfilteron] = useState(false);
   const [curruser, setcurruser] = useState({});
   const [userloaded, setuserloaded] = useState(false);
+  const [cardNumber,setCardNumber] = useState(0)
   const [userinpendinglist, setuserinpendinglist] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
@@ -126,15 +127,17 @@ const Home = () => {
           <div className="col-md-2"></div>
           <div className="col-md-4">
             {userloaded
-              ? userinpendinglist.map((item) => {
-                  if (item.email !== userlog.email) {
+              ? userinpendinglist.map((item,key) => {
+                if(key==cardNumber){
+                  if (item.email !== userlog.email )
+                   {
                     return (
                       <div key={item.id}>
-                        <Card fuser={item} email={cookies.email} />
+                        <Card fuser={item} email={cookies.email} cardNumber={cardNumber} setCardNumber={setCardNumber}/>
                       </div>
                     );
                   }
-                })
+                }})
               : "Loading"}
           </div>
           {/* <div className='col-md-1'>
