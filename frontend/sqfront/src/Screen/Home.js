@@ -5,21 +5,23 @@ import { authActions } from "../store/auth-slice";
 import Filter from "../Components/Filter";
 import Matchdisplay from "../Components/Matchdisplay";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
   const userlog = useSelector((state) => state.auth.user);
-
+  const [cookies, setCookie, removeCookie] = useCookies(null);
   const [user, setuserlist] = useState([]);
-
   const [filteron, setfilteron] = useState(false);
   const [curruser, setcurruser] = useState({});
   const [userloaded, setuserloaded] = useState(false);
+  const [userinpendinglist, setuserinpendinglist] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
-        // console.log(userloaded);
-        setuserloaded(true);
+        
+        // setuserloaded(true);
+        // setuserinpendinglist(res.data);
         // console.log(res.data);
       }
     });
@@ -41,24 +43,65 @@ const Home = () => {
         });
     }
   }, []);
+
+  useEffect(() => {
+    
+    let temparr = [];
+    if(curruser){
+    let temp = user.filter((item) => {
+      if (item.email !== cookies.email ) {
+
+        // console.log(curruser, cookies.email)
+        if (curruser.matches.find((ite) => ite.email === item.email) ) {
+        }
+        else if(curruser.leftSwipe.find((ite) =>  ite.email === item.email)){
+        }
+        else{
+          temparr.push(item);
+        }
+      }
+    });
+  }
+
+    // console.log(temparr)
+    if(userinpendinglist?.length < user.length &&  (curruser.matches?.length>0 || curruser.leftSwipe?.length>0) ){
+      setuserloaded(true)
+      setuserinpendinglist(temparr);
+    }
+    else if(curruser.matches?.length ===0 &&  curruser.leftSwipe?.length ===0){
+      setuserloaded(true)
+      setuserinpendinglist(user);
+    }
+    else{
+      setuserinpendinglist(temparr);
+    }
+    // console.log(userinpendinglist)
+  },[user]);
+
+  
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <Matchdisplay  userinfo = {curruser}/>
+            <Matchdisplay
+            
+              user={user}
+              userinfo={curruser}
+              email={cookies.email}
+            />
           </div>
           <div className="col-md-2"></div>
           <div className="col-md-4">
             {userloaded
-              ? user.map((item) => {
-                  // if (item.email !== userlog.email) {
+              ? userinpendinglist.map((item) => {
+                  if (item.email !== userlog.email) {
                     return (
                       <div key={item.id}>
-                        <Card fuser={item} />
+                        <Card fuser={item} email={cookies.email} />
                       </div>
                     );
-                  // }
+                  }
                 })
               : "Loading"}
           </div>

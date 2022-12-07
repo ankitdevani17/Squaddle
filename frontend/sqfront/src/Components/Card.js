@@ -8,12 +8,35 @@ import Modaluserinfo from "./Modaluserinfo";
 const Card = (props) => {
   const [userdata, setUserdata] = React.useState(props.fuser);
   const [dispmodal, setdispmodal] = useState(false);
-  const leftswipecard = () => {
+  const [rightswipeclick , setrightswipeclick] = useState(false);
+  const [leftswipeclick , setleftswipeclick] = useState(false);
 
-  }
-  const rightswipecard = () =>{
+  const leftswipecard = () => {
+    console.log("left");
+    setleftswipeclick(true);
     
   }
+  const rightswipecard = () =>{
+    console.log("rightswipe")
+    setrightswipeclick(true);
+
+  }
+  useEffect( ()=>{
+    if(rightswipeclick){
+      // console.log("email - ", props.email)
+      // console.log("card email =" ,userdata.email)
+      
+    }
+    setrightswipeclick(false)
+    },[rightswipeclick])
+
+  useEffect ( ()=>{
+    if(leftswipeclick){
+      console.log("email - ", props.email)
+      console.log("card email =" ,userdata.email )
+    }
+    setleftswipeclick(false)
+  },[leftswipeclick])
 
   const dispmoreinfo = ()=>{
     setdispmodal(true)
