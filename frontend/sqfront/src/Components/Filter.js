@@ -21,6 +21,7 @@ const Filter = (props) => {
             id="dropdown-menu-align-right"
             onSelect={selectfilterpref}
           >
+            <Dropdown.Item eventKey="All">All</Dropdown.Item>
             <Dropdown.Item eventKey="Frontend">Frontend</Dropdown.Item>
             <Dropdown.Item eventKey="Backend">Backend</Dropdown.Item>
             <Dropdown.Item eventKey="Data Science">Data Science</Dropdown.Item>

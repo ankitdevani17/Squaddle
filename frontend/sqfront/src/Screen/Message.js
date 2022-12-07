@@ -16,7 +16,7 @@ function Message() {
   const [curruser, setcurruser] = useState([]);
   const [toemailuser, settoemailuser] = useState("");
   const [currmsg, setcurrmsg] = useState("");
-  const [isSend, setIsSend] = useState(true)
+  const [isSend, setIsSend] = useState(true);
 
   useEffect(() => {
     axios
@@ -81,8 +81,8 @@ function Message() {
           console.log(err);
         });
     }
-  }
-  
+  };
+
   const reverseMessageSent = () => {
     if (toemailuser) {
       axios
@@ -98,13 +98,13 @@ function Message() {
           console.log(err);
         });
     }
-  }
+  };
   useEffect(() => {
-messageSent()
+    messageSent();
   }, [toemailuser]);
 
   useEffect(() => {
-  reverseMessageSent()
+    reverseMessageSent();
   }, [toemailuser]);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ messageSent()
 
   const sendmessage = () => {
     console.log(currmsg);
-    setIsSend(true)
+    setIsSend(true);
     console.log("hello bhai print karo ");
     axios
       .post("http://localhost:4000/api/v1/message", {
@@ -132,8 +132,8 @@ messageSent()
       .then((res) => {
         console.log("msg delivered");
         setcurrmsg("");
-        messageSent()
-        reverseMessageSent()
+        messageSent();
+        reverseMessageSent();
       })
       .catch((err) => {
         console.log(err);
@@ -181,9 +181,9 @@ messageSent()
                 <textarea
                   className="chatTextInput"
                   placeholder="Type Something..."
-                  value={isSend?"":currmsg}
+                  value={isSend ? "" : currmsg}
                   onChange={(e) => {
-                    setIsSend(false)
+                    setIsSend(false);
                     setcurrmsg(e.target.value);
                   }}
                 ></textarea>
