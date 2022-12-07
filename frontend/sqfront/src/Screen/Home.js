@@ -29,6 +29,19 @@ const Home = () => {
     if (user) {
       if (interestforfilter) {
         console.log(interestforfilter, "badalll agaya");
+        let temp = user.filter ( (item)=>{
+          if(user?.areaofinterest){
+            if(user.areaofinterest.includes(interestforfilter)){
+              return item
+            }
+            else{
+            }
+          }
+          else{
+            return item
+          }
+        })
+        console.log(temp)
       }
     }
   }, [interestforfilter]);
