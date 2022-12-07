@@ -87,6 +87,7 @@ const Home = () => {
   }, [user]);
 
   return (
+userinpendinglist && 
     <div>
       <div className="container">
         <div className="row">
