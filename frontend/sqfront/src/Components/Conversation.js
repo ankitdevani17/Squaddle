@@ -10,9 +10,7 @@ function Conversation({ pic, curruser , toemailuser, settoemailuser}) {
       
     }
     }}>
-      {/* {
-        console.log("hello ")
-      } */}
+     
       <img src={pic} alt="Profile" className="Conversation_Img" />
       <span className="Conversation_Name">{curruser.name}</span>
     </div>

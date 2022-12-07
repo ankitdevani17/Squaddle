@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 const Home = () => {
   const userlog = useSelector((state) => state.auth.user);
   const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [interestforfilter, setinterestforfilter] = useState("");
   const [user, setuserlist] = useState([]);
   const [filteron, setfilteron] = useState(false);
   const [curruser, setcurruser] = useState({});
@@ -19,13 +20,18 @@ const Home = () => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
-        
-        // setuserloaded(true);
-        // setuserinpendinglist(res.data);
-        // console.log(res.data);
       }
     });
   }, []);
+  useEffect(() => {
+    // console.log(interestforfilter, "badalll agaya");
+    
+    if (user) {
+      if (interestforfilter) {
+        console.log(interestforfilter, "badalll agaya");
+      }
+    }
+  }, [interestforfilter]);
 
   useEffect(() => {
     if (userlog) {
@@ -45,47 +51,47 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    
     let temparr = [];
-    if(curruser){
-    let temp = user.filter((item) => {
-      if (item.email !== cookies.email ) {
-
-        // console.log(curruser, cookies.email)
-        if (curruser.matches.find((ite) => ite.email === item.email) ) {
+    if (curruser) {
+      let temp = user.filter((item) => {
+        if (item.email !== cookies.email) {
+          // console.log(curruser, cookies.email)
+          if (curruser.matches.find((ite) => ite.email === item.email)) {
+          } else if (
+            curruser.leftSwipe.find((ite) => ite.email === item.email)
+          ) {
+          } else {
+            temparr.push(item);
+          }
         }
-        else if(curruser.leftSwipe.find((ite) =>  ite.email === item.email)){
-        }
-        else{
-          temparr.push(item);
-        }
-      }
-    });
-  }
+      });
+    }
 
     // console.log(temparr)
-    if(userinpendinglist?.length < user.length &&  (curruser.matches?.length>0 || curruser.leftSwipe?.length>0) ){
-      setuserloaded(true)
+    if (
+      userinpendinglist?.length < user.length &&
+      (curruser.matches?.length > 0 || curruser.leftSwipe?.length > 0)
+    ) {
+      setuserloaded(true);
       setuserinpendinglist(temparr);
-    }
-    else if(curruser.matches?.length ===0 &&  curruser.leftSwipe?.length ===0){
-      setuserloaded(true)
+    } else if (
+      curruser.matches?.length === 0 &&
+      curruser.leftSwipe?.length === 0
+    ) {
+      setuserloaded(true);
       setuserinpendinglist(user);
-    }
-    else{
+    } else {
       setuserinpendinglist(temparr);
     }
     // console.log(userinpendinglist)
-  },[user]);
+  }, [user]);
 
-  
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-md-3">
             <Matchdisplay
-            
               user={user}
               userinfo={curruser}
               email={cookies.email}
@@ -126,7 +132,10 @@ const Home = () => {
                 >
                   Filter -
                 </button>
-                <Filter />
+                <Filter
+                  interestforfilter={interestforfilter}
+                  setinterestforfilter={setinterestforfilter}
+                />
               </div>
             )}
           </div>

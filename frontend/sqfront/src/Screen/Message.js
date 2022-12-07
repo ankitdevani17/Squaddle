@@ -39,30 +39,30 @@ function Message() {
   const [convo, setCurrConvo] = React.useState([]);
   const [convo1, setCurrConvo1] = React.useState([]);
   const [conversations, setConversations] = React.useState([
-    {
-      from_email: "a@g.co",
-      to_email: "ankitdevani17@gmail.com",
-      message: "Sending message is working fine",
-      timestamp: "2022-11-11T18:42:00.339+00:00",
-    },
-    {
-      from_email: "a@g.co",
-      to_email: "ankitdevani17@gmail.com",
-      message: "Sending message is working fine 2",
-      timestamp: "2023-11-11T18:42:00.339+00:00",
-    },
-    {
-      from_email: "ankitdevani17@gmail.com",
-      to_email: "a@g.co",
-      message: "Sending message is working fine 3",
-      timestamp: "2022-11-11T18:42:00.339+00:00",
-    },
-    {
-      from_email: "ankitdevani17@gmail.com",
-      to_email: "a@g.co",
-      message: "Sending message is working fine 3",
-      timestamp: "2024-11-11T18:42:00.339+00:00",
-    },
+    // {
+    //   from_email: "a@g.co",
+    //   to_email: "ankitdevani17@gmail.com",
+    //   message: "Sending message is working fine",
+    //   timestamp: "2022-11-11T18:42:00.339+00:00",
+    // },
+    // {
+    //   from_email: "a@g.co",
+    //   to_email: "ankitdevani17@gmail.com",
+    //   message: "Sending message is working fine 2",
+    //   timestamp: "2023-11-11T18:42:00.339+00:00",
+    // },
+    // {
+    //   from_email: "ankitdevani17@gmail.com",
+    //   to_email: "a@g.co",
+    //   message: "Sending message is working fine 3",
+    //   timestamp: "2022-11-11T18:42:00.339+00:00",
+    // },
+    // {
+    //   from_email: "ankitdevani17@gmail.com",
+    //   to_email: "a@g.co",
+    //   message: "Sending message is working fine 3",
+    //   timestamp: "2024-11-11T18:42:00.339+00:00",
+    // },
   ]);
 
   useEffect(() => {
