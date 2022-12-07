@@ -15,7 +15,7 @@ function Message() {
   const userlog = useSelector((state) => state.auth.user);
   const [curruser, setcurruser] = useState([]);
   const [toemailuser, settoemailuser] = useState("");
-  const [currmsg , setcurrmsg ] = useState("")
+  const [currmsg, setcurrmsg] = useState("");
 
   useEffect(() => {
     axios
@@ -32,7 +32,7 @@ function Message() {
   //   console.log(toemailuser);
   // }
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [sendmsgclick , setsendmsgclick] = useState(false)
+  const [sendmsgclick, setsendmsgclick] = useState(false);
 
   // const [currentreceivinguser, setcurrentreceivinguser] =
   //   React.useState("Ankit");
@@ -110,27 +110,25 @@ function Message() {
       return new Date(a.timestamp) - new Date(b.timestamp);
     });
     setConversations(arr);
-  }, [convo, convo1]);
+  }, [convo, convo1, sendmsgclick]);
 
-  
-  const sendmessage = ()=>{
-    console.log(currmsg)
-    
-      console.log("hello bhai print karo ")
-      axios.post('http://localhost:4000/api/v1/message',{
-        from_email : cookies.email,
-        to_email : toemailuser,
-        message : currmsg
+  const sendmessage = () => {
+    console.log(currmsg);
+    console.log("hello bhai print karo ");
+    axios
+      .post("http://localhost:4000/api/v1/message", {
+        from_email: cookies.email,
+        to_email: toemailuser,
+        message: currmsg,
       })
-      .then((res)=>{
-        console.log("msg delivered")
-        setcurrmsg("")
+      .then((res) => {
+        console.log("msg delivered");
+        setcurrmsg("");
       })
-      .catch((err)=>{
-        console.log(err)
-      })
-    
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -173,9 +171,14 @@ function Message() {
                 <textarea
                   className="chatTextInput"
                   placeholder="Type Something..."
-                  onChange={(e)=>{setcurrmsg(e.target.value)}}
+                  onChange={(e) => {
+                    setcurrmsg(e.target.value);
+                  }}
                 ></textarea>
-                <button  onClick = {sendmessage} className="chatSubmitButton"> Send </button>
+                <button onClick={sendmessage} className="chatSubmitButton">
+                  {" "}
+                  Send{" "}
+                </button>
               </div>
             </div>
           ) : (

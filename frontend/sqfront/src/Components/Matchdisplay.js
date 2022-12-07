@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
 import MatchDispProf from "./MatchDispProf";
 import LikedDispProf from "./LikedDispProf";
+import Modalmatchinfo from "./Modalmatchinfo";
+import axios from "axios";
 
 const Matchdisplay = (props) => {
   const [displikeprof, setdisplikeprof] = useState(false);
+  const [dispmatchmodal, setdispmatchmodal] = useState(false)
+  const [userdata, setuserdata] = useState({})
+  const [currclickemail, setcurrclickemail] = useState("")
   const [match, setmatch] = useState(
     props?.userinfo.matches ? props.userinfo.matches : []
   );
   const [matcharr, setmatcharr] = useState([]);
-
+  useEffect ( ()=>{
+    let temp = props.user.filter( (item)=>{
+      if(item.email === currclickemail){
+        setuserdata(item)
+      }
+    })
+  },[currclickemail])
   useEffect(() => {
     let temparr = [];
     let temp = match.filter((item) => {
@@ -24,7 +35,6 @@ const Matchdisplay = (props) => {
       let temp = props.user.filter((item) => {
         if (item.email === temparr[i].email) {
           if (item.matches.find((ite) => ite.email === props.email)) {
-            
             finalmatcharr.push({
               name: temparr[i].name,
               email: temparr[i].email,
@@ -46,13 +56,20 @@ const Matchdisplay = (props) => {
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
+        <Modalmatchinfo dispmatchmodal={dispmatchmodal} 
+        data={userdata } 
+        setdispmatchmodal={setdispmatchmodal}/>
           {matcharr
             ? matcharr.map((mat) => {
                 return (
                   <MatchDispProf
                     key={mat.name}
                     matcharr={matcharr}
+                    email = {mat.email}
+                    setcurrclickemail = {setcurrclickemail}
                     name={mat.name}
+                    dispmatchmodal = {dispmatchmodal}
+                    setdispmatchmodal = {setdispmatchmodal}
                   />
                 );
               })

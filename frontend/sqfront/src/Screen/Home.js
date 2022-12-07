@@ -47,11 +47,11 @@ const Home = () => {
   useEffect(() => {
     
     let temparr = [];
-    if(curruser && user){
+    if(curruser){
     let temp = user.filter((item) => {
-      if (item.email !== cookies.email) {
-        // console.log(curruser, cookies.email)
+      if (item.email !== cookies.email ) {
 
+        // console.log(curruser, cookies.email)
         if (curruser.matches.find((ite) => ite.email === item.email) ) {
         }
         else if(curruser.leftSwipe.find((ite) =>  ite.email === item.email)){
@@ -85,6 +85,7 @@ const Home = () => {
         <div className="row">
           <div className="col-md-3">
             <Matchdisplay
+            
               user={user}
               userinfo={curruser}
               email={cookies.email}
