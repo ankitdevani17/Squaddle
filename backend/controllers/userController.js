@@ -22,24 +22,25 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 201, res);
 });
 
-//UserDetails put request
+//UserDetails put request 
 exports.userDetails = catchAsyncErrors(async (req, res, next) => {
   const { email, token } = req.body;
   console.log("first");
   console.log(email, token, req, "hello");
-  const user = await User.findOne({ email });
-
+  const user =  await User.findOne({ email })
+  
   // if(!email || !password){
-  //   return next(new ErrorHander("Please Enter Email and Password",400))
-
-  const update = req.body;
-  const opts = { new: true };
-
-  let doc = await User.findOneAndUpdate({ email }, update, opts);
-  res.send({
-    success: true,
-    email,
-  });
+    //   return next(new ErrorHander("Please Enter Email and Password",400))
+    
+    
+    const update = req.body;
+    const opts = { new: true };
+    
+    let doc = await User.findOneAndUpdate({ email }, update, opts);
+    res.send({
+      success: true,
+      email,
+    });
 });
 
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
@@ -63,6 +64,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
   sendToken(user, 200, res);
 });
+
 
 // Logout
 
@@ -90,36 +92,44 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 });
 
-exports.userInfo = catchAsyncErrors(async (req, res, next) => {
-  const email = req.query.email;
-  const user = await User.findOne({ email });
-  res.send(user);
+
+exports.userInfo =  catchAsyncErrors(async (req, res, next) => {
+
+  const email = req.query.email
+  const user = await User.findOne({email})
+  res.send(user)
 });
+
+
 
 // Swipe right and add match
-exports.addMatch = catchAsyncErrors(async (req, res, next) => {
-  const { email, matchedEmail } = req.body;
-  const query = { email: email };
-  // console.log(matchedEmail)
-  const matchedUser = await User.findOne({ email: matchedEmail });
-  // console.log(matchedUser.name)
+exports.addMatch =  catchAsyncErrors(async (req, res, next) => {
 
-  const updateMatch = {
-    $push: { matches: { email: matchedEmail, name: matchedUser.name } }, // adding name to display on dashboard- matches list
-    // $push : {acceptedmatches : {email: matchedEmail, name:matchedUser.name }},
-  };
+const {email, matchedEmail} = req.body
+const query = {email : email}
+// console.log(matchedEmail)
+const matchedUser = await User.findOne({email : matchedEmail})
+// console.log(matchedUser.name)
 
-  const user = await User.updateOne(query, updateMatch);
-  res.json(user);
+const updateMatch = {
+  $push : {matches : {email: matchedEmail, name:matchedUser.name }}, // adding name to display on dashboard- matches list 
+  // $push : {acceptedmatches : {email: matchedEmail, name:matchedUser.name }},
+}
+
+
+const user = await User.updateOne(query, updateMatch)
+res.json(user)
+
 });
 
-// Matchuser list
 
-exports.getMatchedUser = catchAsyncErrors(async (req, res, next) => {
-  const emails = JSON.parse(req.query.emails);
+// Matchuser list 
+
+
+exports.getMatchedUser =  catchAsyncErrors(async (req, res, next) => {
+  const emails = JSON.parse(req.query.emails)
   // console.log(req.query.emails)
   // console.log(emails)
-<<<<<<< HEAD
   
   const pipeline =
   [
@@ -131,6 +141,7 @@ exports.getMatchedUser = catchAsyncErrors(async (req, res, next) => {
           }
       }
   ]
+
 
 const foundUsers = await User.aggregate(pipeline)
 // console.log(foundUsers)
@@ -152,64 +163,42 @@ exports.leftSwipe=  catchAsyncErrors(async (req, res, next) => {
   const user = await User.updateOne(query, updateMatch)
   res.json(user)
   
+  
   });
-=======
-  const pipeline = [
-    {
-      $match: {
-        email: {
-          $in: emails,
-        },
-      },
-    },
-  ];
->>>>>>> a1e7e9d7775b89b0e2a6628f3d971e9c3a833d07
 
-  const foundUsers = await User.aggregate(pipeline);
-  // console.log(foundUsers)
-  res.json(foundUsers);
-});
 
-// Swipe left and remove from users list
-exports.leftSwipe = catchAsyncErrors(async (req, res, next) => {
-  const { email, leftSwipeEmail } = req.body;
-  const query = { email: email };
+// display all users on dashboard 
+exports.getAllUsers=  catchAsyncErrors(async (req, res, next) => {
 
-  const updateMatch = {
-    $push: { leftSwipe: { email: leftSwipeEmail } },
-  };
+const users = await User.find({})
+res.json(users)
 
-  const user = await User.updateOne(query, updateMatch);
-  res.json(user);
-});
-
-// display all users on dashboard
-exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
-  const users = await User.find({});
-  res.json(users);
 });
 
 // Get Messages by from_userId and to_userId
 
-exports.getMessage = catchAsyncErrors(async (req, res, next) => {
-  const from_email = req.query.from_email;
-  const to_email = req.query.to_email;
+exports.getMessage=  catchAsyncErrors(async (req, res, next) => {
+  const from_email = req.query.from_email
+  const to_email = req.query.to_email
+  
   const query = {
-    from_email: from_email,
-    to_email: to_email,
-  };
-  const foundMessages = await Message.find(query);
-  res.send(foundMessages);
-});
+    from_email:from_email, to_email :  to_email
+}
+
+const foundMessages = await Message.find(query)
+res.send(foundMessages)
+
+  });
 
 // Add a Message to our Database
 
-exports.addMessage = catchAsyncErrors(async (req, res, next) => {
-  const { from_email, to_email, message } = req.body;
-  const insertedMessage = await Message.create({
-    from_email,
-    to_email,
-    message,
+exports.addMessage=  catchAsyncErrors(async (req, res, next) => {
+
+  const {from_email, to_email,message} = req.body
+  const insertedMessage = await Message.create({from_email, to_email,message})
+  res.send(insertedMessage)
+
   });
-  res.send(insertedMessage);
-});
+
+
+

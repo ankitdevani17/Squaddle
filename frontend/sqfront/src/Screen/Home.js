@@ -52,10 +52,11 @@ const Home = () => {
 
   useEffect(() => {
     let temparr = [];
-    if (curruser) {
+    if (curruser.matches) {
       let temp = user.filter((item) => {
         if (item.email !== cookies.email) {
-          // console.log(curruser, cookies.email)
+          
+          console.log("here is curr", curruser)
           if (curruser.matches.find((ite) => ite.email === item.email)) {
           } else if (
             curruser.leftSwipe.find((ite) => ite.email === item.email)
@@ -87,7 +88,7 @@ const Home = () => {
   }, [user]);
 
   return (
-userinpendinglist && 
+
     <div>
       <div className="container">
         <div className="row">
