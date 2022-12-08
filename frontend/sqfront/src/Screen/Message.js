@@ -11,7 +11,10 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 
-function Message() {
+function Message(props) {
+  useEffect((item) => {
+    console.log(props.listofmatchuser);
+  }, [props.listofmatchuser]);
   const userlog = useSelector((state) => state.auth.user);
   const [curruser, setcurruser] = useState([]);
   const [searchUser, setSearchUser] = useState("");
@@ -25,7 +28,9 @@ function Message() {
       .get(`http://localhost:4000/api/v1/userinfo?email=${userlog.email}`)
       .then((res) => {
         if (res.data) {
-          setcurruser(res.data.matches);
+          setcurruser(props.listofmatchuser);
+          // console.log(res.data.matches)
+          // console.log(props.listofmatchuser)
           // console.log(res.data.matches);
         }
       });
@@ -37,36 +42,9 @@ function Message() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [sendmsgclick, setsendmsgclick] = useState(false);
 
-  // const [currentreceivinguser, setcurrentreceivinguser] =
-  //   React.useState("Ankit");
   const [convo, setCurrConvo] = React.useState([]);
   const [convo1, setCurrConvo1] = React.useState([]);
-  const [conversations, setConversations] = React.useState([
-    // {
-    //   from_email: "a@g.co",
-    //   to_email: "ankitdevani17@gmail.com",
-    //   message: "Sending message is working fine",
-    //   timestamp: "2022-11-11T18:42:00.339+00:00",
-    // },
-    // {
-    //   from_email: "a@g.co",
-    //   to_email: "ankitdevani17@gmail.com",
-    //   message: "Sending message is working fine 2",
-    //   timestamp: "2023-11-11T18:42:00.339+00:00",
-    // },
-    // {
-    //   from_email: "ankitdevani17@gmail.com",
-    //   to_email: "a@g.co",
-    //   message: "Sending message is working fine 3",
-    //   timestamp: "2022-11-11T18:42:00.339+00:00",
-    // },
-    // {
-    //   from_email: "ankitdevani17@gmail.com",
-    //   to_email: "a@g.co",
-    //   message: "Sending message is working fine 3",
-    //   timestamp: "2024-11-11T18:42:00.339+00:00",
-    // },
-  ]);
+  const [conversations, setConversations] = React.useState([]);
   const messageSent = () => {
     if (toemailuser) {
       axios
@@ -114,7 +92,7 @@ function Message() {
 
     let arr = [...convo];
     arr.push(...convo1);
-    console.log(arr);
+    // console.log(arr);
     arr.sort((a, b) => {
       return new Date(a.timestamp) - new Date(b.timestamp);
     });
@@ -122,11 +100,11 @@ function Message() {
   }, [convo, convo1, sendmsgclick]);
 
   const sendmessage = () => {
-    var newTime = new Date().toLocaleTimeString( navigator.language, {
-      hour: '2-digit',
-      minute:'2-digit'
+    var newTime = new Date().toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
     });
-    console.log("newtime is ",newTime);
+    console.log("newtime is ", newTime);
     // setFormattedTime(newTime);
     console.log(currmsg);
     setIsSend(true);
@@ -136,10 +114,10 @@ function Message() {
         from_email: cookies.email,
         to_email: toemailuser,
         message: currmsg,
-        timestamp : newTime
+        timestamp: newTime,
       })
       .then((res) => {
-        console.log(newTime);
+        // console.log(newTime);
         setcurrmsg("");
         messageSent();
         reverseMessageSent();
@@ -154,28 +132,35 @@ function Message() {
       <div className="message">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search For Friends" className="chatMenuInput" onChange = {(e)=>{
-              setSearchUser(e.target.value)}}/>
+            <input
+              placeholder="Search For Friends"
+              className="chatMenuInput"
+              onChange={(e) => {
+                setSearchUser(e.target.value);
+              }}
+            />
 
-
-
-{curruser.filter((val)=>{
-              if(searchUser === ""){
-                return val
-              }else if(val.name.toLowerCase().includes(searchUser.toLowerCase())){
-                return val
-              }
-            }).map((user) => {
-              return (
-                <>
-                  <Conversation
-                    toemailuser={toemailuser}
-                    settoemailuser={settoemailuser}
-                    curruser={user}
-                  />
-                </>
-              );
-            })}
+            {curruser
+              .filter((val) => {
+                if (searchUser === "") {
+                  return val;
+                } else if (
+                  val.name.toLowerCase().includes(searchUser.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((user) => {
+                return (
+                  <>
+                    <Conversation
+                      toemailuser={toemailuser}
+                      settoemailuser={settoemailuser}
+                      curruser={user}
+                    />
+                  </>
+                );
+              })}
           </div>
         </div>
 
@@ -189,7 +174,7 @@ function Message() {
                       {cookies.email === item.to_email ? (
                         <Text message={item.message} item={item} />
                       ) : (
-                        <Text own={true} message={item.message} item={item}  />
+                        <Text own={true} message={item.message} item={item} />
                       )}
                     </>
                   );
