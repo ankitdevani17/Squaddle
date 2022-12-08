@@ -12,10 +12,10 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     name,
     email,
     password,
-    avatar: {
-      public_id: "sample user",
-      url: "sample url",
-    },
+    // avatar: {
+    //   public_id: "sample user",
+    //   url: "sample url",
+    // },
   });
 
   const token = user.getJWTToken();

@@ -20,7 +20,6 @@ const Profile = () => {
       .then((res) => {
         if (res.data) {
           setUserdata(res.data);
-
           console.log(res.data);
         }
       });
@@ -103,13 +102,13 @@ const Profile = () => {
               ? 1
               : projectlist[projectlist.length - 1].id + 1,
           title: "",
-          grpsize: "",
-          desc: "",
+          groupsize: "",
+          description: "",
           mentor: "",
           duration: "",
           link: "",
           repo: "",
-          techstack: "",
+          frameworks: "",
         },
       ];
     });
@@ -182,20 +181,28 @@ const Profile = () => {
   }, [image]);
 
   const fileInputRef = useRef();
+  const objectRef = useRef({});
+
+  useEffect(() => {
+   objectRef.current = Profobj;    
+  });
+
 
   const handleUpload = (e) => {
     e.preventDefault();
     fileInputRef.current.click();
   };
 
+
+
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-md-3">
-            {userdata.avatar ? (
+            {image ? (
               <img
-                src={userdata.avatar}
+                src={image}
                 style={{ objectFit: "cover", width: 100 }}
                 className="image-style align-content-center flex justify-content-center my-4 mx-3"
                 alt="..."
@@ -228,7 +235,7 @@ const Profile = () => {
               className="form-control"
               name="name"
               onChange={(e)=>setName(e.target.value)}
-              value={name}
+              value={userdata.name ? userdata.name : Profobj.name}
               placeholder=""
             />
             <h5>University : </h5>
@@ -247,12 +254,12 @@ const Profile = () => {
             <input
               type="text"
               className="form-control"
-              name="linkedinurl"
+              name="linkedinURL"
               onChange={profinitialization}
               value={
                 userdata.linkedinURL
                   ? userdata.linkedinURL
-                  : Profobj.linkedinurl
+                  : Profobj.linkedinURL
               }
               placeholder="Linkedin Url"
             />
@@ -276,10 +283,10 @@ const Profile = () => {
             <input
               type="text"
               className="form-control"
-              name="twitterurl"
+              name="twitterURL"
               onChange={profinitialization}
               value={
-                userdata.twitterURL ? userdata.twitterURL : Profobj.twitterurl
+                userdata.twitterURL ? userdata.twitterURL : Profobj.twitterURL
               }
               placeholder=""
             />
@@ -311,12 +318,12 @@ const Profile = () => {
             <input
               type="text"
               className="form-control"
-              name="industrialexp"
+              name="experience"
               onChange={profinitialization}
               value={
                 userdata.experience
                   ? userdata.experience
-                  : Profobj.industrialexp
+                  : Profobj.experience
               }
               placeholder="Title"
             />
@@ -373,7 +380,7 @@ const Profile = () => {
                       <input
                         type="number"
                         className="form-control"
-                        name="grpsize"
+                        name="groupsize"
                         onChange={(e) => {
                           textupdate(e, ind);
                         }}
@@ -398,7 +405,7 @@ const Profile = () => {
                       <div className="form-floating">
                         <textarea
                           className="form-control"
-                          name="desc"
+                          name="description"
                           onChange={(e) => {
                             textupdate(e, ind);
                           }}
@@ -452,7 +459,7 @@ const Profile = () => {
                       <input
                         type="text"
                         className="form-control"
-                        name="techstack"
+                        name="frameworks"
                         onChange={(e) => {
                           textupdate(e, ind);
                         }}
