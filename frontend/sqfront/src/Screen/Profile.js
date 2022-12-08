@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import image from "../Image/avatar.jpeg";
+// import image from "../Image/avatar.jpeg";
 import { useCookies } from "react-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -143,26 +143,69 @@ const Profile = () => {
     }
   }, [putdatadb]);
 
+  const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
+  const handleImage = (e) => {
+    // const url = "http://localhost:4000/api/image";
+    // const formData = new FormData();
+    // formData.append("image", image);
+    // // setImage(URL.createObjectURL(image));
+    // axios.post(url, formData).then((res) => {
+    //   console.log(res.data);
+    // }).catch((err) => {
+    //   console.log(err);
+    // })x
+    setFile(e.target.files[0]);
+    console.log(e.target.files);
+  };
+
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        console.log(reader.result);
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      
+    }
+  }, [file]);
+
+  useEffect(() => {
+    setProfobj({
+      ...Profobj,
+      avatar: image,
+    });
+    // console.log(projectlist)
+  }, [image]);
+
+
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-md-3">
             <img
-              src={Profobj.image}
+              // src={Profobj.image}
+              src={image}
               className="image-style align-content-center flex justify-content-center my-4 mx-3"
               alt="..."
             ></img>
             <input
               type="file"
               name=""
-              value={Profobj.image}
-              onClick={imageupload}
+              // value={Profobj.image}
+
+              onChange={handleImage}
               className="form-control"
               id="inputGroupFile04"
               aria-describedby="inputGroupFileAddon04"
               aria-label="Upload"
             />
+            <button type="submit" onClick={handleImage}>
+              Done
+            </button>
           </div>
 
           <div className="col-md-4">

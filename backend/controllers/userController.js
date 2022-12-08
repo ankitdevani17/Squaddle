@@ -200,5 +200,10 @@ exports.addMessage=  catchAsyncErrors(async (req, res, next) => {
 
   });
 
-
+  exports.getImage = catchAsyncErrors(async (req, res, next) => {
+    
+   
+  
+  
+  });
 
