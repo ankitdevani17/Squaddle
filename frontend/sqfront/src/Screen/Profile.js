@@ -16,7 +16,7 @@ const Profile = () => {
     axios
       .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
       .then((res) => {
-        if (res.data) {
+        if (res.data && res.data.avatar) {
           setUserdata(res.data);
 
           console.log(res.data)
@@ -148,25 +148,17 @@ const Profile = () => {
 
   const [file, setFile] = useState("");
   const [image, setImage] = useState("");
+
   const handleImage = (e) => {
-    // const url = "http://localhost:4000/api/image";
-    // const formData = new FormData();
-    // formData.append("image", image);
-    // // setImage(URL.createObjectURL(image));
-    // axios.post(url, formData).then((res) => {
-    //   console.log(res.data);
-    // }).catch((err) => {
-    //   console.log(err);
-    // })x
     setFile(e.target.files[0]);
-    console.log(e.target.files);
+    // console.log(e.target.files);
   };
 
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log(reader.result);
+        // console.log(reader.result);
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
@@ -180,9 +172,10 @@ const Profile = () => {
       ...Profobj,
       avatar: image,
     });
-    // console.log(projectlist)
+    console.log(image);
+    console.log(Profobj)
   }, [image]);
-
+  
 
   return (
     <div>
@@ -190,8 +183,7 @@ const Profile = () => {
         <div className="row">
           <div className="col-md-3">
             <img
-              // src={Profobj.image}
-              src={image}
+              src={userdata.avatar}
               className="image-style align-content-center flex justify-content-center my-4 mx-3"
               alt="..."
             ></img>
@@ -206,9 +198,6 @@ const Profile = () => {
               aria-describedby="inputGroupFileAddon04"
               aria-label="Upload"
             />
-            <button type="submit" onClick={handleImage}>
-              Done
-            </button>
           </div>
 
           <div className="col-md-4">

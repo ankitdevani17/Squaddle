@@ -12,5 +12,4 @@ router.route("/leftswipe").put(leftSwipe)
 router.route("/message").post(addMessage)
 router.route("/message").get(getMessage)
 router.route("/matchedUser").get(getMatchedUser)
-// router.route("/image").get(getImage)
 module.exports=router;

@@ -199,11 +199,3 @@ exports.addMessage=  catchAsyncErrors(async (req, res, next) => {
   res.send(insertedMessage)
 
   });
-
-  exports.getImage = catchAsyncErrors(async (req, res, next) => {
-    
-   
-  
-  
-  });
-
