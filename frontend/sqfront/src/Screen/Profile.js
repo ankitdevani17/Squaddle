@@ -184,6 +184,7 @@ const Profile = () => {
           <div className="col-md-3">
             <img
               src={userdata.avatar}
+              style={{ objectFit: "cover" }}
               className="image-style align-content-center flex justify-content-center my-4 mx-3"
               alt="..."
             ></img>
