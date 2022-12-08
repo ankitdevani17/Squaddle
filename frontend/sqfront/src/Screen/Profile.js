@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import image from "../Image/avatar.jpeg";
 import { useCookies } from "react-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
+import logo from "../UploadOutlined.svg";
 
 const Profile = () => {
   const [projectlist, setProjectlist] = useState([]);
-  const [Profobj, setProfobj] = useState([]);
+  const [Profobj, setProfobj] = useState({})
+  const [name, setName] = useState("");
   const [putdatadb, setputdatadb] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [userdata, setUserdata] = useState([]);
@@ -16,10 +18,10 @@ const Profile = () => {
     axios
       .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
       .then((res) => {
-        if (res.data && res.data.avatar) {
+        if (res.data) {
           setUserdata(res.data);
 
-          console.log(res.data)
+          console.log(res.data);
         }
       });
   }, []);
@@ -122,12 +124,7 @@ const Profile = () => {
   }, [projectlist]);
 
   const submitprofiledb = () => {
-    setputdatadb(true);
-  };
-
-  useEffect(() => {
-    if (putdatadb) {
-      axios
+    axios
         .put(
           "http://localhost:4000/api/v1/register",
           {
@@ -141,15 +138,21 @@ const Profile = () => {
           // console.log()
           console.log(Profobj);
           console.log(res.data);
-          setputdatadb(false);
         });
+  };
+
+  useEffect(() => {
+    if (putdatadb) {
+      console.log("in api", Profobj)
+     
     }
   }, [putdatadb]);
 
   const [file, setFile] = useState("");
   const [image, setImage] = useState("");
 
-  const handleImage = (e) => {
+
+  const handleFile = (e) => {
     setFile(e.target.files[0]);
     // console.log(e.target.files);
   };
@@ -158,42 +161,59 @@ const Profile = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // console.log(reader.result);
+        console.log(reader.result);
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
     } else {
-      
+      setImage(null)
     }
   }, [file]);
 
   useEffect(() => {
+    console.log(image);
     setProfobj({
       ...Profobj,
       avatar: image,
     });
-    console.log(image);
-    console.log(Profobj)
-  }, [image]);
   
+    console.log(Profobj.avatar);
+    console.log(Profobj);
+  }, [image]);
+
+  const fileInputRef = useRef();
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    fileInputRef.current.click();
+  };
 
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <img
-              src={userdata.avatar}
-              style={{ objectFit: "cover" }}
-              className="image-style align-content-center flex justify-content-center my-4 mx-3"
-              alt="..."
-            ></img>
+            {userdata.avatar ? (
+              <img
+                src={userdata.avatar}
+                style={{ objectFit: "cover", width: 100 }}
+                className="image-style align-content-center flex justify-content-center my-4 mx-3"
+                alt="..."
+              ></img>
+            ) : (
+              <div>
+                <button style={{ width: "130px", height: "130px", borderRadius: "50%" }} onClick={handleUpload}>
+                  <img src={logo} style={{ height: "20px", width: "20px" }} />
+                  Upload Photo
+                </button>
+              </div>
+            )}
             <input
               type="file"
               name=""
-              // value={Profobj.image}
-
-              onChange={handleImage}
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFile}
               className="form-control"
               id="inputGroupFile04"
               aria-describedby="inputGroupFileAddon04"
@@ -207,8 +227,8 @@ const Profile = () => {
               type="text"
               className="form-control"
               name="name"
-              onChange={profinitialization}
-              value={userdata.name ? userdata.name : Profobj.name}
+              onChange={(e)=>setName(e.target.value)}
+              value={name}
               placeholder=""
             />
             <h5>University : </h5>

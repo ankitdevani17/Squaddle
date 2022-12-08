@@ -200,3 +200,24 @@ exports.addMessage=  catchAsyncErrors(async (req, res, next) => {
   res.send(insertedMessage)
 
   });
+
+//put image in database
+  exports.getimage = catchAsyncErrors(async (req, res, next) => {
+    const { email, token } = req.body;
+    console.log("first");
+    console.log(email, token, req, "hello");
+    const user =  await User.findOne({ email })
+    
+    // if(!email || !password){
+      //   return next(new ErrorHander("Please Enter Email and Password",400))
+      
+      
+      const update = {avatar : req.body.avatar};
+      const opts = { new: true };
+      
+      let doc = await User.findOneAndUpdate({ email }, update, opts);
+      res.send({
+        success: true,
+        email,
+      });
+  });
