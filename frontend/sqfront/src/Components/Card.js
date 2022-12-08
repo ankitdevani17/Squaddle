@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import avatar from "../Image/avatar.jpeg";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 // import ReactRoundedImage from "react-rounded-image";
 import "./Card.css";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import Modaluserinfo from "./Modaluserinfo";
 
 const Card = (props) => {
+  const [cookies, setCookie, removeCookie] = useCookies(null);
   const [userdata, setUserdata] = React.useState(props.fuser);
   const [dispmodal, setdispmodal] = useState(false);
   const [rightswipeclick , setrightswipeclick] = useState(false);
@@ -13,14 +16,27 @@ const Card = (props) => {
 
   const leftswipecard = () => {
     console.log("left");
+    console.log("cookies wala", cookies.email)
     setleftswipeclick(true);
     props.setCardNumber(props.cardNumber + 1);
+    axios.put("http://localhost:4000/api/v1/leftswipe", {
+      email: cookies.email,
+      leftSwipeEmail : props.fuser.email,
+    }, {mode:'cors'},{ withCredentials: true }).then(res => {
+    console.log(res.data);}
+    )
   }
   const rightswipecard = () =>{
     console.log("rightswipe")
+    console.log("right me swipe ", props.fuser.email)
     setrightswipeclick(true);
     props.setCardNumber(props.cardNumber + 1);
-
+    axios.put("http://localhost:4000/api/v1/addmatch", {
+      email: cookies.email,
+      matchedEmail : props.fuser.email,
+    }, {mode:'cors'},{ withCredentials: true }).then(res => {
+    console.log(res.data);}
+    )
   }
   useEffect( ()=>{
     if(rightswipeclick){
