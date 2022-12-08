@@ -7,10 +7,6 @@ function Conversation({ pic, curruser , toemailuser, settoemailuser}) {
     <div className="Conversation" onClick ={ ()=>{
       if(curruser?.email){
       settoemailuser(curruser?.email)
-      
-
-      
-      
     }
     }}>
      

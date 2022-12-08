@@ -154,7 +154,8 @@ exports.leftSwipe=  catchAsyncErrors(async (req, res, next) => {
 
   const {email, leftSwipeEmail} = req.body
   const query = {email : email}
-  
+  console.log("email", email)
+  console.log(leftSwipeEmail)
   const updateMatch = {
     $push : {leftSwipe : {email: leftSwipeEmail}},
   

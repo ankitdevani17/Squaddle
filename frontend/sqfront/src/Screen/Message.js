@@ -14,6 +14,7 @@ import { authActions } from "../store/auth-slice";
 function Message() {
   const userlog = useSelector((state) => state.auth.user);
   const [curruser, setcurruser] = useState([]);
+  const [searchUser, setSearchUser] = useState("");
   const [toemailuser, settoemailuser] = useState("");
   const [currmsg, setcurrmsg] = useState("");
   const [isSend, setIsSend] = useState(true);
@@ -129,7 +130,7 @@ function Message() {
     // setFormattedTime(newTime);
     console.log(currmsg);
     setIsSend(true);
-    console.log("hello bhai print karo ");
+    // console.log("hello bhai print karo ");
     axios
       .post("http://localhost:4000/api/v1/message", {
         from_email: cookies.email,
@@ -153,9 +154,18 @@ function Message() {
       <div className="message">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search For Friends" className="chatMenuInput" />
+            <input placeholder="Search For Friends" className="chatMenuInput" onChange = {(e)=>{
+              setSearchUser(e.target.value)}}/>
 
-            {curruser.map((user) => {
+
+
+{curruser.filter((val)=>{
+              if(searchUser === ""){
+                return val
+              }else if(val.name.toLowerCase().includes(searchUser.toLowerCase())){
+                return val
+              }
+            }).map((user) => {
               return (
                 <>
                   <Conversation
