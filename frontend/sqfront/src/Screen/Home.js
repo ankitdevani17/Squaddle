@@ -12,14 +12,17 @@ const Home = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [interestforfilter, setinterestforfilter] = useState("");
   const [user, setuserlist] = useState([]);
+  const [storegetuser, setstoregetuser] = useState([])
   const [filteron, setfilteron] = useState(false);
   const [curruser, setcurruser] = useState({});
   const [userloaded, setuserloaded] = useState(false);
+  const [cardNumber,setCardNumber] = useState(0)
   const [userinpendinglist, setuserinpendinglist] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:4000/api/v1/getallusers").then((res) => {
       if (res.data) {
         setuserlist(res.data);
+        setstoregetuser(res.data)
       }
     });
   }, []);
@@ -29,7 +32,29 @@ const Home = () => {
     if (user) {
       if (interestforfilter) {
         console.log(interestforfilter, "badalll agaya");
+        
+        if(interestforfilter==="All"){
+          setuserlist(storegetuser)
+        }
+        else {
+        let temp = user.filter ( (item)=>{
+          
+           if(item?.role){
+            if(item.role.includes(interestforfilter)){
+              return item
+            }
+            else{
+              console.log("else me hai ")
+            }
+          }
+          else{
+            return item
+          }
+        })
+        console.log(temp)
+      setuserlist(temp)
       }
+    }
     }
   }, [interestforfilter]);
 
@@ -56,7 +81,7 @@ const Home = () => {
       let temp = user.filter((item) => {
         if (item.email !== cookies.email) {
           
-          console.log("here is curr", curruser)
+          // console.log("here is curr", curruser)
           if (curruser.matches.find((ite) => ite.email === item.email)) {
           } else if (
             curruser.leftSwipe.find((ite) => ite.email === item.email)
@@ -102,15 +127,17 @@ const Home = () => {
           <div className="col-md-2"></div>
           <div className="col-md-4">
             {userloaded
-              ? userinpendinglist.map((item) => {
-                  if (item.email !== userlog.email) {
+              ? userinpendinglist.map((item,key) => {
+                if(key==cardNumber){
+                  if (item.email !== userlog.email )
+                   {
                     return (
                       <div key={item.id}>
-                        <Card fuser={item} email={cookies.email} />
+                        <Card fuser={item} email={cookies.email} cardNumber={cardNumber} setCardNumber={setCardNumber}/>
                       </div>
                     );
                   }
-                })
+                }})
               : "Loading"}
           </div>
           {/* <div className='col-md-1'>

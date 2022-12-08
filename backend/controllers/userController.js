@@ -162,7 +162,7 @@ exports.leftSwipe=  catchAsyncErrors(async (req, res, next) => {
   
   const user = await User.updateOne(query, updateMatch)
   res.json(user)
-  
+
   
   });
 
@@ -194,8 +194,8 @@ res.send(foundMessages)
 
 exports.addMessage=  catchAsyncErrors(async (req, res, next) => {
 
-  const {from_email, to_email,message} = req.body
-  const insertedMessage = await Message.create({from_email, to_email,message})
+  const {from_email, to_email,message,timestamp} = req.body
+  const insertedMessage = await Message.create({from_email, to_email,message,timestamp})
   res.send(insertedMessage)
 
   });

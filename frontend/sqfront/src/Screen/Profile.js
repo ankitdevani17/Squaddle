@@ -14,10 +14,12 @@ const Profile = () => {
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/userinfo?email=a@g.co")
+      .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
       .then((res) => {
         if (res.data) {
           setUserdata(res.data);
+
+          console.log(res.data)
         }
       });
   }, []);
@@ -28,7 +30,7 @@ const Profile = () => {
       ...Profobj,
       role: e,
     });
-    console.log(Profobj);
+    // console.log(Profobj);
   };
   const profinitialization = (e) => {
     const r = e.target.name;
@@ -136,8 +138,9 @@ const Profile = () => {
           { withCredentials: true }
         )
         .then((res) => {
+          // console.log()
           console.log(Profobj);
-          console.log(res);
+          console.log(res.data);
           setputdatadb(false);
         });
     }
@@ -277,7 +280,7 @@ const Profile = () => {
           <div className="col-md-3">
             <h5>Area of Interest</h5>
             <DropdownButton
-              title={Profobj.role ? Profobj.role : "Select Interest"}
+              title={Profobj.role ? Profobj.role : userdata.role}
               id="dropdown-menu-align-right"
               onSelect={areaofinterestselect}
             >

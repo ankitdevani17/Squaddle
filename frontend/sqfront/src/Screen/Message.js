@@ -16,7 +16,8 @@ function Message() {
   const [curruser, setcurruser] = useState([]);
   const [toemailuser, settoemailuser] = useState("");
   const [currmsg, setcurrmsg] = useState("");
-  const [isSend, setIsSend] = useState(true)
+  const [isSend, setIsSend] = useState(true);
+  const [formattedTime, setFormattedTime] = useState("");
 
   useEffect(() => {
     axios
@@ -81,8 +82,8 @@ function Message() {
           console.log(err);
         });
     }
-  }
-  
+  };
+
   const reverseMessageSent = () => {
     if (toemailuser) {
       axios
@@ -98,13 +99,13 @@ function Message() {
           console.log(err);
         });
     }
-  }
+  };
   useEffect(() => {
-messageSent()
+    messageSent();
   }, [toemailuser]);
 
   useEffect(() => {
-  reverseMessageSent()
+    reverseMessageSent();
   }, [toemailuser]);
 
   useEffect(() => {
@@ -120,20 +121,27 @@ messageSent()
   }, [convo, convo1, sendmsgclick]);
 
   const sendmessage = () => {
+    var newTime = new Date().toLocaleTimeString( navigator.language, {
+      hour: '2-digit',
+      minute:'2-digit'
+    });
+    console.log("newtime is ",newTime);
+    // setFormattedTime(newTime);
     console.log(currmsg);
-    setIsSend(true)
+    setIsSend(true);
     console.log("hello bhai print karo ");
     axios
       .post("http://localhost:4000/api/v1/message", {
         from_email: cookies.email,
         to_email: toemailuser,
         message: currmsg,
+        timestamp : newTime
       })
       .then((res) => {
-        console.log("msg delivered");
+        console.log(newTime);
         setcurrmsg("");
-        messageSent()
-        reverseMessageSent()
+        messageSent();
+        reverseMessageSent();
       })
       .catch((err) => {
         console.log(err);
@@ -169,9 +177,9 @@ messageSent()
                   return (
                     <>
                       {cookies.email === item.to_email ? (
-                        <Text message={item.message} />
+                        <Text message={item.message} item={item} />
                       ) : (
-                        <Text own={true} message={item.message} />
+                        <Text own={true} message={item.message} item={item}  />
                       )}
                     </>
                   );
@@ -181,9 +189,9 @@ messageSent()
                 <textarea
                   className="chatTextInput"
                   placeholder="Type Something..."
-                  value={isSend?"":currmsg}
+                  value={isSend ? "" : currmsg}
                   onChange={(e) => {
-                    setIsSend(false)
+                    setIsSend(false);
                     setcurrmsg(e.target.value);
                   }}
                 ></textarea>

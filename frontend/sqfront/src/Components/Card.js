@@ -14,11 +14,12 @@ const Card = (props) => {
   const leftswipecard = () => {
     console.log("left");
     setleftswipeclick(true);
-    
+    props.setCardNumber(props.cardNumber + 1);
   }
   const rightswipecard = () =>{
     console.log("rightswipe")
     setrightswipeclick(true);
+    props.setCardNumber(props.cardNumber + 1);
 
   }
   useEffect( ()=>{
