@@ -6,20 +6,20 @@ import axios from "axios";
 
 const Matchdisplay = (props) => {
   const [displikeprof, setdisplikeprof] = useState(false);
-  const [dispmatchmodal, setdispmatchmodal] = useState(false)
-  const [userdata, setuserdata] = useState({})
-  const [currclickemail, setcurrclickemail] = useState("")
+  const [dispmatchmodal, setdispmatchmodal] = useState(false);
+  const [userdata, setuserdata] = useState({});
+  const [currclickemail, setcurrclickemail] = useState("");
   const [match, setmatch] = useState(
     props?.userinfo.matches ? props.userinfo.matches : []
   );
   const [matcharr, setmatcharr] = useState([]);
-  useEffect ( ()=>{
-    let temp = props.user.filter( (item)=>{
-      if(item.email === currclickemail){
-        setuserdata(item)
+  useEffect(() => {
+    let temp = props.user.filter((item) => {
+      if (item.email === currclickemail) {
+        setuserdata(item);
       }
-    })
-  },[currclickemail])
+    });
+  }, [currclickemail]);
   useEffect(() => {
     let temparr = [];
     let temp = match.filter((item) => {
@@ -44,6 +44,8 @@ const Matchdisplay = (props) => {
       });
     }
     setmatcharr(finalmatcharr);
+    // console.log(finalmatcharr)
+    props.setlistofmatchuser(finalmatcharr)
   }, [props.userinfo.matches]);
 
   useEffect(() => {}, []);
@@ -56,20 +58,22 @@ const Matchdisplay = (props) => {
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
-        <Modalmatchinfo dispmatchmodal={dispmatchmodal} 
-        data={userdata } 
-        setdispmatchmodal={setdispmatchmodal}/>
+          <Modalmatchinfo
+            dispmatchmodal={dispmatchmodal}
+            data={userdata}
+            setdispmatchmodal={setdispmatchmodal}
+          />
           {matcharr
             ? matcharr.map((mat) => {
                 return (
                   <MatchDispProf
                     key={mat.name}
                     matcharr={matcharr}
-                    email = {mat.email}
-                    setcurrclickemail = {setcurrclickemail}
+                    email={mat.email}
+                    setcurrclickemail={setcurrclickemail}
                     name={mat.name}
-                    dispmatchmodal = {dispmatchmodal}
-                    setdispmatchmodal = {setdispmatchmodal}
+                    dispmatchmodal={dispmatchmodal}
+                    setdispmatchmodal={setdispmatchmodal}
                   />
                 );
               })
