@@ -138,6 +138,7 @@ const Profile = () => {
           console.log(Profobj);
           console.log(res.data);
         });
+        alert("Profile Updated Successfully");
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 
-const Modalmatchinfo = (props) => {
+const Modalmatchinfo = (props) => { 
   return (
     <div>
       <Modal
@@ -31,15 +31,15 @@ const Modalmatchinfo = (props) => {
                   </h5>
                   <h5 className="">
                     Project Description :{" "}
-                    {project?.Description
-                      ? project?.Description
+                    {project?.description
+                      ? project?.Ddscription
                       : "No Project listed"}
                   </h5>
                   <h5 className="">
                     Project Techstack :{" "}
-                    {project?.techstack
-                      ? project?.techstack
-                      : "No Project listed"}
+                    {project?.frameworks
+                      ? project?.frameworks
+                      : "No Techstack listed"}
                   </h5>
                 </div>
               );

@@ -53,8 +53,9 @@ const Matchdisplay = (props) => {
   useEffect(() => {
     setmatch(props?.userinfo.matches ? props.userinfo.matches : []);
   }, [props.userinfo.matches]);
+  
   return (
-    <div style={{ backgroundColor: "yellow  " }}>
+    <div style={{ backgroundColor: "yellow" }}>
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
@@ -64,7 +65,7 @@ const Matchdisplay = (props) => {
             setdispmatchmodal={setdispmatchmodal}
           />
           {matcharr
-            ? matcharr.map((mat) => {
+            ? matcharr.map((mat) => { 
                 return (
                   <MatchDispProf
                     key={mat.name}
