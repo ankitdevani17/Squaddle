@@ -28,20 +28,17 @@ function Message(props) {
       .get(`http://localhost:4000/api/v1/userinfo?email=${userlog.email}`)
       .then((res) => {
         if (res.data) {
-          setcurruser(props.listofmatchuser);
-          // console.log(res.data.matches)
-          // console.log(props.listofmatchuser)
-          // console.log(res.data.matches);
+          setcurruser(res.data.matches);
+          
         }
       });
   }, []);
 
-  // {
-  //   console.log(toemailuser);
-  // }
+ 
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [sendmsgclick, setsendmsgclick] = useState(false);
 
+  
   const [convo, setCurrConvo] = React.useState([]);
   const [convo1, setCurrConvo1] = React.useState([]);
   const [conversations, setConversations] = React.useState([]);
@@ -88,8 +85,6 @@ function Message(props) {
   }, [toemailuser]);
 
   useEffect(() => {
-    // setConversations(convo)
-
     let arr = [...convo];
     arr.push(...convo1);
     // console.log(arr);

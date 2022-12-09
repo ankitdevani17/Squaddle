@@ -22,13 +22,20 @@ const Matchdisplay = (props) => {
   }, [currclickemail]);
   useEffect(() => {
     let temparr = [];
+
+    // console.log(match);
+    // console.log(props.userinfo);
     let temp = match.filter((item) => {
+      console.log("h2lo");
+
       if (matcharr.find((matcharr) => matcharr === item.email)) {
+        console.log("helo");
       } else {
         temparr.push({ name: item.name, email: item.email });
-        // setmatcharr(temparr);
-      }
+        console.log("helo 1");
+      } 
     });
+    
 
     let finalmatcharr = [];
     for (let i = 0; i < temparr.length; i++) {
@@ -43,10 +50,9 @@ const Matchdisplay = (props) => {
         }
       });
     }
+    
     setmatcharr(finalmatcharr);
-    // console.log(finalmatcharr)
-    props.setlistofmatchuser(finalmatcharr)
-  }, [props.userinfo.matches]);
+  }, [props.userinfo.matches, match]);
 
   useEffect(() => {}, []);
 
@@ -55,7 +61,7 @@ const Matchdisplay = (props) => {
   }, [props.userinfo.matches]);
   
   return (
-    <div style={{ backgroundColor: "yellow" }}>
+    <div style={{ backgroundColor: "skyblue" }}>
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
@@ -81,30 +87,6 @@ const Matchdisplay = (props) => {
             : "No match found"}
         </div>
       </div>
-      {/* <button type='button' onClick={() => setdisplikeprof(!displikeprof)} className='btn btn-primary mx-5'> {displikeprof ? "+" : "-"} </button>
-            {
-                !displikeprof
-
-                &&
-                <div className='container text-center'>
-                    <h3 className='text-center'>
-                        People who liked you
-                    </h3>
-                    <div className='row'>
-                        {
-                            matches.map((match) => {
-                                return (
-                                    <>
-
-                                        <LikedDispProf img={match.img} />
-                                    </>
-                                )
-                            }
-                            )
-                        }
-                    </div>
-                </div>
-            } */}
     </div>
   );
 };

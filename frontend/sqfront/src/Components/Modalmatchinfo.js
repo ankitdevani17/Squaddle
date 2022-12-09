@@ -32,7 +32,7 @@ const Modalmatchinfo = (props) => {
                   <h5 className="">
                     Project Description :{" "}
                     {project?.description
-                      ? project?.Ddscription
+                      ? project?.description
                       : "No Project listed"}
                   </h5>
                   <h5 className="">

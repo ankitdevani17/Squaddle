@@ -24,13 +24,12 @@ const Home = (props) => {
       if (res.data) {
         setuserlist(res.data);
         setstoregetuser(res.data);
-        // console.log(res.data)
+        
       }
+
     });
   }, []);
   useEffect(() => {
-    // console.log(interestforfilter, "badalll agaya");
-
     if (user) {
       if (interestforfilter) {
         console.log(interestforfilter, "badalll agaya");
@@ -57,58 +56,56 @@ const Home = (props) => {
   }, [interestforfilter]);
 
   useEffect(() => {
-    if (userlog) {
+    if (cookies.email) {
       // console.log(userlog);
       axios
-        .get(`http://localhost:4000/api/v1/userinfo?email=${userlog.email}`)
+        .get(`http://localhost:4000/api/v1/userinfo?email=${cookies.email}`)
         .then((res) => {
-          if (res.data) {
-            setcurruser(res.data);
-            // console.log(res.data)
-          }
+          setcurruser(res.data)
         })
-        .catch((err) => {
-          // console.log(err)
-        });
+        .catch((err) => {});
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     let temparr = [];
+    console.log(curruser)
+    console.log(user)
     if (curruser.matches) {
+      
       let temp = user.filter((item) => {
+        
         if (item.email !== cookies.email) {
-          // console.log("entered match filter")
           // console.log("here is curr", curruser)
           if (curruser.matches.find((ite) => ite.email === item.email)) {
+            console.log("match m ")
           } else if (
             curruser.leftSwipe.find((ite) => ite.email === item.email)
           ) {
+            console.log("left swipe ")
+
           } else {
             temparr.push(item);
+            
           }
         }
       });
     }
-    // console.log(temparr);
+    else{
+      temparr = user.filter ( (item)=>{
+        if(item.email!==cookies.email){
+        }
+        else{
+          return item
+        }
+      })
 
-    if (
-      userinpendinglist?.length < user.length &&
-      (curruser.matches?.length > 0 || curruser.leftSwipe?.length > 0)
-    ) {
-      setuserloaded(true);
-      setuserinpendinglist(temparr);
-    } else if (
-      curruser.matches?.length === 0 &&
-      curruser.leftSwipe?.length === 0
-    ) {
-      setuserloaded(true);
-      setuserinpendinglist(user);
-    } else {
-      setuserinpendinglist(temparr);
     }
-    // props.setuser
-    // console.log(userinpendinglist)
+
+    console.log(temparr)
+    console.log(userinpendinglist)
+    setuserinpendinglist(temparr)
+    setuserloaded(true)
   }, [user]);
 
   return (
@@ -128,7 +125,7 @@ const Home = (props) => {
           <div className="col-md-4">
             {userloaded
               ? userinpendinglist.map((item, key) => {
-                  if (key === cardNumber) {
+                  if (key == cardNumber) {
                     if (item.email !== userlog.email) {
                       return (
                         <div key={item.id}>
@@ -158,7 +155,7 @@ const Home = (props) => {
               </button>
             )}
             {!filteron && (
-              <div className="container" style={{ backgroundColor: "#ADD8E6" }}>
+              <div className="container" style={{ backgroundColor: "skyblue" }}>
                 <button
                   type="button"
                   className="btn btn-primary"

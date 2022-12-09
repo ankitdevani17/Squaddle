@@ -40,10 +40,10 @@ const Modaluserinfo = (props) => {
                     {project?.title ? project?.title : "No Project listed"}
                   </h5>
                   <h5 className="">
-                    Description :{" "}
-                    {project?.description
-                      ? project?.description
-                      : "No Project listed"}
+                    Project Description :{" "}
+                    {project?.Description
+                      ? project?.Description
+                        : "No Project listed"}
                   </h5>
                   <h5 className="">
                     Group size :{" "}
