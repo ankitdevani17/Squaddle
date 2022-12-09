@@ -202,8 +202,8 @@ const Profile = () => {
           <div className="col-md-3">
             {image ? (
               <img
-                src={image}
-                style={{ objectFit: "cover", width: 100 }}
+                src={image} 
+                style={{ objectFit: "cover", width: "130px", height: "130px", borderRadius: "50%" }}
                 className="image-style align-content-center flex justify-content-center my-4 mx-3"
                 alt="..."
               ></img>
@@ -440,7 +440,7 @@ const Profile = () => {
                           textupdate(e, ind);
                         }}
                         value={userdata.projects.mentor}
-                        placeholder="Title"
+                        placeholder="Mentor"
                       />
                       <h6>Duration of Project </h6>
                       <input
@@ -451,7 +451,7 @@ const Profile = () => {
                           textupdate(e, ind);
                         }}
                         value={userdata.projects.duration}
-                        placeholder="Title"
+                        placeholder="Duration"
                       />
                     </div>
                     <h6>Frameworks Used </h6>

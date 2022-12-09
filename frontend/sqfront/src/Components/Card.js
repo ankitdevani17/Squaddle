@@ -96,8 +96,8 @@ const Card = (props) => {
                     )
                   }):"No Project listed"
                 }
-               <h5 className="card-title">Linkedin :  {userdata?.linkedinURL ? userdata?.linkedinURL : "Linkedin Url not displayable"}</h5>
-                <h5 className="card-title">YOE: {userdata?.experience ? userdata?.experience: "No experience displayed"} yr</h5>
+               <h5 className="card-title">Linkedin:  {userdata?.linkedinURL ? userdata?.linkedinURL : "Linkedin Url not available"}</h5>
+                <h5 className="card-title">YOE: {userdata?.experience ? userdata?.experience: "Experience not available"} yr</h5>
                 <div className="icons">
                   <button type="button" onClick={leftswipecard} className="btn btn-danger round">
                     {" "}

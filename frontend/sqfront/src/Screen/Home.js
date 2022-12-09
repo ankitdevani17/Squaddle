@@ -154,7 +154,7 @@ const Home = (props) => {
                 className="btn btn-primary"
                 onClick={() => setfilteron(!filteron)}
               >
-                Filter +
+              Filter by +
               </button>
             )}
             {!filteron && (
@@ -164,7 +164,7 @@ const Home = (props) => {
                   className="btn btn-primary"
                   onClick={() => setfilteron(!filteron)}
                 >
-                  Filter -
+                Filter by -
                 </button>
                 <Filter
                   interestforfilter={interestforfilter}

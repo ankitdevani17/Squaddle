@@ -5,7 +5,7 @@ const Modaluserinfo = (props) => {
   return (
     <div>
       <Modal
-        show={props.dispmodal}
+        show={props.dispmodal} 
         onHide={() => {
           props.setdispmodal(false);
         }}
@@ -15,9 +15,11 @@ const Modaluserinfo = (props) => {
         </Modal.Header>
         <Modal.Body>
           <h5 className="">
+          University:{" "}
             {props.data?.university
               ? props.data?.university
               : "University data not available"}{" "}
+              {/* {console.log(props.data)} */}
           </h5>
 
           {props.data?.projects ? (
@@ -31,14 +33,14 @@ const Modaluserinfo = (props) => {
                   </h5>
                   <h5 className="">
                     Project Description :{" "}
-                    {project?.Description
-                      ? project?.Description
+                    {project?.description
+                      ? project?.description
                       : "No Project listed"}
                   </h5>
                   <h5 className="">
                     Project Techstack :{" "}
-                    {project?.techstack
-                      ? project?.techstack
+                    {project?.frameworks
+                      ? project?.frameworks
                       : "No Project listed"}
                   </h5>
                 </div>
