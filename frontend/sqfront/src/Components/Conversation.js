@@ -10,8 +10,8 @@ function Conversation({ pic, curruser , toemailuser, settoemailuser}) {
     }
     }}>
      
-      <img src={pic} alt="Profile" className="Conversation_Img" />
-      <span className="Conversation_Name">{curruser.name}</span>
+      {/* <img src={pic} alt="Profile" className="Conversation_Img" /> */}
+      <h4 className="Conversation_Name">{curruser.name}</h4>
     </div>
   );
 }

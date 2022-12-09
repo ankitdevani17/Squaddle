@@ -107,7 +107,7 @@ const Card = (props) => {
                     {" "}
                     <BsArrowLeftCircle size={50} />
                   </button>
-                  <button type="button" onClick={dispmoreinfo} className="btn btn-dark">More user info</button>
+                  <button type="button" style={{height : "35px"}} onClick={dispmoreinfo} className="btn my-3 btn-dark">More user info</button>
 
                   <button type="button"  onClick = {rightswipecard} className="btn btn-success round">
                     {" "}

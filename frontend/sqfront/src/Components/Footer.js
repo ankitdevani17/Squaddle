@@ -12,9 +12,8 @@ const Footer = () => {
         <div className="row  py-5  mx-4">
           <div className="col-md-4 ">
             <small className="">
-              Maiores fuga, cum praesentium esse laudantium! Distinctio nihil
-              blanditiis accusantium atque, quo maxime inventore eum! Cum
-              dolorem quibusdam amet et qui.
+            "Welcome to Squaddle, the peer to peer network of nerds, where you
+            can find your coding partner or search relevant projects to work on."
             </small>
           </div>
           <div className="col-md-1"></div>
@@ -23,7 +22,7 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>About</li>
               <li>Plans</li>
-              <li>Trainers</li>
+              {/* <li>Trainers</li> */}
               <li>Gallery</li>
               <li>Contact</li>
             </ul>
@@ -32,7 +31,7 @@ const Footer = () => {
             <h4>Insights</h4>
             <ul className="list-unstyled">
               <li>Blog</li>
-              <li>Case Studies</li>
+              {/* <li>Case Studies</li> */}
               <li>Events</li>
               <li>Communities</li>
               <li>FAQs</li>
@@ -45,7 +44,7 @@ const Footer = () => {
               <li>Support</li>
               <li>Products</li>
               <li>Blog</li>
-              <li>Contact</li>
+              {/* <li>Contact</li> */}
             </ul>
           </div>
         </div>
