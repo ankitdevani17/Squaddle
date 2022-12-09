@@ -14,7 +14,7 @@ const Home = (props) => {
   const [interestforfilter, setinterestforfilter] = useState("");
   const [user, setuserlist] = useState([]);
   const [storegetuser, setstoregetuser] = useState([]);
-  const [filteron, setfilteron] = useState(false);
+  const [filteron, setfilteron] = useState(true);
   const [curruser, setcurruser] = useState({});
   const [userloaded, setuserloaded] = useState(false);
   const [cardNumber, setCardNumber] = useState(0);

@@ -26,7 +26,7 @@ const Aboutus = () => {
           </p>
 
           <h1>
-            <strong>MISSION</strong>
+            <strong>Mission</strong>
           </h1>
           <p>
             The mission of Squaddle is simple: connect Coders globally to make
@@ -34,11 +34,10 @@ const Aboutus = () => {
           </p>
 
           <h1>
-            <strong>WHO ARE WE?</strong>
+            <strong>Who Are We?</strong>
           </h1>
           <p>
-            Squaddle is an initiative started in october 2021 by Prajal Patidar
-            and Diksha Patidar with an aim of easing to find peer programmers to
+            Squaddle is an initiative started in August 2022 by a group of students from Ahmedabad University with an aim of easing to find peer programmers to
             transform their ideas into code.
           </p>
         </div>
