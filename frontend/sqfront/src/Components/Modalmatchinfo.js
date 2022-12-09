@@ -15,16 +15,23 @@ const Modalmatchinfo = (props) => {
         </Modal.Header>
         <Modal.Body>
           <h5 className="">
-            {props.data?.university
+            University: {props.data?.university
               ? props.data?.university
-              : "University data not available"}{" "}
+              : "University not available"}{" "}
           </h5>
-
+          <h5 className="">
+          Bio:{" "}
+            {props.data?.bio
+              ? props.data?.bio
+              : "Bio not available"}{" "}
+              {/* {console.log(props.data)} */}
+          </h5>
+          <h3 >Projects</h3>
           {props.data?.projects ? (
             props.data?.projects.map((project) => {
               return (
                 <div key={project.title}>
-                  {console.log("helo")}
+                  {/* {console.log("helo")} */}
                   <h5 className="">
                     Project Title :{" "}
                     {project?.title ? project?.title : "No Project listed"}
@@ -36,10 +43,34 @@ const Modalmatchinfo = (props) => {
                       : "No Project listed"}
                   </h5>
                   <h5 className="">
+                    Group size :{" "}
+                    {project?.groupsize
+                      ? project?.groupsize
+                      : "-"}
+                  </h5>
+                  <h5 className="">
+                    Mentor :{" "}
+                    {project?.mentor
+                      ? project?.mentor
+                      : "No Mentor"}
+                  </h5>
+                  <h5 className="">
+                    Duration :{" "}
+                    {project?.duration
+                      ? project?.duration
+                      : "-"}
+                  </h5>
+                  <h5 className="">
                     Project Techstack :{" "}
                     {project?.frameworks
                       ? project?.frameworks
                       : "No Techstack listed"}
+                  </h5>
+                  <h5 className="">
+                    Github Repo Link :{" "}
+                    {project?.repo
+                      ? project?.repo
+                      : "Link not available"}
                   </h5>
                 </div>
               );

@@ -81,27 +81,27 @@ const Card = (props) => {
             props.fuser ?
               <>
               <Modaluserinfo dispmodal={dispmodal} data={userdata } setdispmodal={setdispmodal}/>
-                <h5 className="card-title">{userdata?.name} </h5>
-                <h5 className="card-title">{userdata?.university ?userdata?.university : "University data not available"} </h5>
-                <h5 className="card-title"> </h5>
-                <h5 className="card-title">Projects :: </h5>
+                <h5 className="card-title">Name: {userdata?.name} </h5>
+                <h5 className="card-title">University: {userdata?.university ?userdata?.university : "University data not available"} </h5>
+                {/* <h5 className="card-title"> </h5> */}
+                {/* <h5 className="card-title">Projects :: </h5> */}
                 {
                   userdata?.projects ? userdata.projects.map ( (item)=>{
                     return(
                       <>
-                      <h5 className="card-title">
-                        Title: {""}{item.title} </h5>
+                      {/* <h5 className="card-title">
+                        Title: {""}{item.title} </h5> */}
                       {/* <h5 className="card-title">{item.description} </h5>
                       <h5 className="card-title">{item.techstack} </h5> */}
                       </>
                     )
                   }):"No Project listed"
                 }
-               <h5 className="card-title">Linkedin:  {userdata?.linkedinURL ? userdata?.linkedinURL : "Linkedin Url not available"}</h5>
-               <h5 className="card-title">Twitter:  {userdata?.twitterURL ? userdata?.twitterURL : "Twitter Url not available"}</h5>
                <h5 className="card-title">Area of Interest: {userdata?.role ? userdata?.role: "Not available"} yr</h5>
                <h5 className="card-title">YOE: {userdata?.experience ? userdata?.experience: "Experience not available"} yr</h5>
-
+               <h5 className="card-title">Linkedin:  {userdata?.linkedinURL ? userdata?.linkedinURL : "Linkedin Url not available"}</h5>
+               <h5 className="card-title">Twitter:  {userdata?.twitterURL ? userdata?.twitterURL : "Twitter Url not available"}</h5>
+               
                 <div className="icons">
                   <button type="button" onClick={leftswipecard} className="btn btn-danger round">
                     {" "}
