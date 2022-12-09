@@ -60,7 +60,7 @@ const Matchdisplay = (props) => {
     setmatch(props?.userinfo.matches ? props.userinfo.matches : []);
   }, [props.userinfo.matches]);
   return (
-    <div style={{ backgroundColor: "yellow  " }}>
+    <div style={{ backgroundColor: "skyblue" }}>
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">

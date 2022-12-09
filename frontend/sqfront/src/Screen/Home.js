@@ -105,8 +105,6 @@ const Home = () => {
     console.log(userinpendinglist)
     setuserinpendinglist(temparr)
     setuserloaded(true)
-    
-    
   }, [user]);
 
   return (
@@ -154,7 +152,7 @@ const Home = () => {
               </button>
             )}
             {!filteron && (
-              <div className="container" style={{ backgroundColor: "#ADD8E6" }}>
+              <div className="container" style={{ backgroundColor: "skyblue" }}>
                 <button
                   type="button"
                   className="btn btn-primary"
