@@ -26,47 +26,19 @@ function Message() {
       .then((res) => {
         if (res.data) {
           setcurruser(res.data.matches);
-          // console.log(res.data.matches);
+          
         }
       });
   }, []);
 
-  // {
-  //   console.log(toemailuser);
-  // }
+ 
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [sendmsgclick, setsendmsgclick] = useState(false);
 
-  // const [currentreceivinguser, setcurrentreceivinguser] =
-  //   React.useState("Ankit");
+  
   const [convo, setCurrConvo] = React.useState([]);
   const [convo1, setCurrConvo1] = React.useState([]);
-  const [conversations, setConversations] = React.useState([
-    // {
-    //   from_email: "a@g.co",
-    //   to_email: "ankitdevani17@gmail.com",
-    //   message: "Sending message is working fine",
-    //   timestamp: "2022-11-11T18:42:00.339+00:00",
-    // },
-    // {
-    //   from_email: "a@g.co",
-    //   to_email: "ankitdevani17@gmail.com",
-    //   message: "Sending message is working fine 2",
-    //   timestamp: "2023-11-11T18:42:00.339+00:00",
-    // },
-    // {
-    //   from_email: "ankitdevani17@gmail.com",
-    //   to_email: "a@g.co",
-    //   message: "Sending message is working fine 3",
-    //   timestamp: "2022-11-11T18:42:00.339+00:00",
-    // },
-    // {
-    //   from_email: "ankitdevani17@gmail.com",
-    //   to_email: "a@g.co",
-    //   message: "Sending message is working fine 3",
-    //   timestamp: "2024-11-11T18:42:00.339+00:00",
-    // },
-  ]);
+  const [conversations, setConversations] = React.useState([]);
   const messageSent = () => {
     if (toemailuser) {
       axios
@@ -110,8 +82,6 @@ function Message() {
   }, [toemailuser]);
 
   useEffect(() => {
-    // setConversations(convo)
-
     let arr = [...convo];
     arr.push(...convo1);
     console.log(arr);
@@ -122,11 +92,11 @@ function Message() {
   }, [convo, convo1, sendmsgclick]);
 
   const sendmessage = () => {
-    var newTime = new Date().toLocaleTimeString( navigator.language, {
-      hour: '2-digit',
-      minute:'2-digit'
+    var newTime = new Date().toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
     });
-    console.log("newtime is ",newTime);
+    console.log("newtime is ", newTime);
     // setFormattedTime(newTime);
     console.log(currmsg);
     setIsSend(true);
@@ -136,7 +106,7 @@ function Message() {
         from_email: cookies.email,
         to_email: toemailuser,
         message: currmsg,
-        timestamp : newTime
+        timestamp: newTime,
       })
       .then((res) => {
         console.log(newTime);
@@ -154,28 +124,35 @@ function Message() {
       <div className="message">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search For Friends" className="chatMenuInput" onChange = {(e)=>{
-              setSearchUser(e.target.value)}}/>
+            <input
+              placeholder="Search For Friends"
+              className="chatMenuInput"
+              onChange={(e) => {
+                setSearchUser(e.target.value);
+              }}
+            />
 
-
-
-{curruser.filter((val)=>{
-              if(searchUser === ""){
-                return val
-              }else if(val.name.toLowerCase().includes(searchUser.toLowerCase())){
-                return val
-              }
-            }).map((user) => {
-              return (
-                <>
-                  <Conversation
-                    toemailuser={toemailuser}
-                    settoemailuser={settoemailuser}
-                    curruser={user}
-                  />
-                </>
-              );
-            })}
+            {curruser
+              .filter((val) => {
+                if (searchUser === "") {
+                  return val;
+                } else if (
+                  val.name.toLowerCase().includes(searchUser.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((user) => {
+                return (
+                  <>
+                    <Conversation
+                      toemailuser={toemailuser}
+                      settoemailuser={settoemailuser}
+                      curruser={user}
+                    />
+                  </>
+                );
+              })}
           </div>
         </div>
 
@@ -189,7 +166,7 @@ function Message() {
                       {cookies.email === item.to_email ? (
                         <Text message={item.message} item={item} />
                       ) : (
-                        <Text own={true} message={item.message} item={item}  />
+                        <Text own={true} message={item.message} item={item} />
                       )}
                     </>
                   );

@@ -6,29 +6,36 @@ import axios from "axios";
 
 const Matchdisplay = (props) => {
   const [displikeprof, setdisplikeprof] = useState(false);
-  const [dispmatchmodal, setdispmatchmodal] = useState(false)
-  const [userdata, setuserdata] = useState({})
-  const [currclickemail, setcurrclickemail] = useState("")
+  const [dispmatchmodal, setdispmatchmodal] = useState(false);
+  const [userdata, setuserdata] = useState({});
+  const [currclickemail, setcurrclickemail] = useState("");
   const [match, setmatch] = useState(
     props?.userinfo.matches ? props.userinfo.matches : []
   );
   const [matcharr, setmatcharr] = useState([]);
-  useEffect ( ()=>{
-    let temp = props.user.filter( (item)=>{
-      if(item.email === currclickemail){
-        setuserdata(item)
-      }
-    })
-  },[currclickemail])
   useEffect(() => {
-    let temparr = [];
-    let temp = match.filter((item) => {
-      if (matcharr.find((matcharr) => matcharr === item.email)) {
-      } else {
-        temparr.push({ name: item.name, email: item.email });
-        // setmatcharr(temparr);
+    let temp = props.user.filter((item) => {
+      if (item.email === currclickemail) {
+        setuserdata(item);
       }
     });
+  }, [currclickemail]);
+  useEffect(() => {
+    let temparr = [];
+
+    // console.log(match);
+    // console.log(props.userinfo);
+    let temp = match.filter((item) => {
+      console.log("h2lo");
+
+      if (matcharr.find((matcharr) => matcharr === item.email)) {
+        console.log("helo");
+      } else {
+        temparr.push({ name: item.name, email: item.email });
+        console.log("helo 1");
+      } 
+    });
+    
 
     let finalmatcharr = [];
     for (let i = 0; i < temparr.length; i++) {
@@ -43,8 +50,9 @@ const Matchdisplay = (props) => {
         }
       });
     }
+    
     setmatcharr(finalmatcharr);
-  }, [props.userinfo.matches]);
+  }, [props.userinfo.matches, match]);
 
   useEffect(() => {}, []);
 
@@ -56,50 +64,28 @@ const Matchdisplay = (props) => {
       <div className="container text-center">
         <h3>My Matches</h3>
         <div className="row">
-        <Modalmatchinfo dispmatchmodal={dispmatchmodal} 
-        data={userdata } 
-        setdispmatchmodal={setdispmatchmodal}/>
+          <Modalmatchinfo
+            dispmatchmodal={dispmatchmodal}
+            data={userdata}
+            setdispmatchmodal={setdispmatchmodal}
+          />
           {matcharr
             ? matcharr.map((mat) => {
                 return (
                   <MatchDispProf
                     key={mat.name}
                     matcharr={matcharr}
-                    email = {mat.email}
-                    setcurrclickemail = {setcurrclickemail}
+                    email={mat.email}
+                    setcurrclickemail={setcurrclickemail}
                     name={mat.name}
-                    dispmatchmodal = {dispmatchmodal}
-                    setdispmatchmodal = {setdispmatchmodal}
+                    dispmatchmodal={dispmatchmodal}
+                    setdispmatchmodal={setdispmatchmodal}
                   />
                 );
               })
             : "No match found"}
         </div>
       </div>
-      {/* <button type='button' onClick={() => setdisplikeprof(!displikeprof)} className='btn btn-primary mx-5'> {displikeprof ? "+" : "-"} </button>
-            {
-                !displikeprof
-
-                &&
-                <div className='container text-center'>
-                    <h3 className='text-center'>
-                        People who liked you
-                    </h3>
-                    <div className='row'>
-                        {
-                            matches.map((match) => {
-                                return (
-                                    <>
-
-                                        <LikedDispProf img={match.img} />
-                                    </>
-                                )
-                            }
-                            )
-                        }
-                    </div>
-                </div>
-            } */}
     </div>
   );
 };

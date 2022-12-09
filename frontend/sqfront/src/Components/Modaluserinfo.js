@@ -33,7 +33,7 @@ const Modaluserinfo = (props) => {
                     Project Description :{" "}
                     {project?.Description
                       ? project?.Description
-                      : "No Project listed"}
+                        : "No Project listed"}
                   </h5>
                   <h5 className="">
                     Project Techstack :{" "}
