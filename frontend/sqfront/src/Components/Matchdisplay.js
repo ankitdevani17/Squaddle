@@ -52,6 +52,7 @@ const Matchdisplay = (props) => {
     }
     
     setmatcharr(finalmatcharr);
+    props.setlistofmatchuser(finalmatcharr);
   }, [props.userinfo.matches, match]);
 
   useEffect(() => {}, []);

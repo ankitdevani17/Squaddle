@@ -28,7 +28,7 @@ function Message(props) {
       .get(`http://localhost:4000/api/v1/userinfo?email=${userlog.email}`)
       .then((res) => {
         if (res.data) {
-          setcurruser(res.data.matches);
+          setcurruser(props.listofmatchuser);
           
         }
       });
@@ -89,7 +89,7 @@ function Message(props) {
     arr.push(...convo1);
     // console.log(arr);
     arr.sort((a, b) => {
-      return new Date(a.timestamp) - new Date(b.timestamp);
+      return new Date ("1970/01/01 " + a.timestamp) - new Date ("1970/01/01 " + b.timestamp);
     });
     setConversations(arr);
   }, [convo, convo1, sendmsgclick]);
